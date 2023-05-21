@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="TextViewStyle" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/quicksand</item>
+        <item name="android:textAllCaps">false</item>
+    </style>
+
+    <style name="ButtonStyle" parent="Widget.AppCompat.Button">
+    <!--<item name="textAllCaps">false</item>-->
+        <item name="fontFamily">@font/quicksand_bold</item>
+        <item name="android:background">@drawable/coustom_button</item>
+        <item name="android:fontFamily">@font/quicksand_regular</item>
+    </style>
+
+    <style name="rounded_shap">
+        <item name="cornerSize">50%</item>
+    </style>
+
+</resources>
