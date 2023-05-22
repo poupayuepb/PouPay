@@ -41,13 +41,10 @@ public class SplashScreen extends AppCompatActivity {
         txt_namePouPay.setAnimation(bottom);
         txt_slogan.setAnimation(bottom);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                Intent intent = new Intent(SplashScreen.this, TelaLogin.class);
-                startActivity(intent);
-                finish();
-            }
+        new Handler().postDelayed(() -> {
+            Intent intent = new Intent(SplashScreen.this, TelaLogin.class);
+            startActivity(intent);
+            finish();
         },SPLASH_DURATION);
     }
 }

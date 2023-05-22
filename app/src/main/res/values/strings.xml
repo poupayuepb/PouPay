@@ -37,4 +37,5 @@
     <string name="signing">Entrando…</string>
     <string name="signup_finished">Cadastro Concluído</string>
     <string name="signup_sucess_text">Seu cadastro no PouPay foi realizado com sucesso. Clique no botão abaixo para voltar a tela de login para entrar com suas credenciais.</string>
+    <string name="connection_error">Houve um problema com a comunicação com o servidor, cheque sua internet e tente novamente.</string>
 </resources>

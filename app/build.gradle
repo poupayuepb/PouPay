@@ -30,7 +30,7 @@ android {
 
 dependencies {
     // Driver do PostgreSQL
-    implementation 'org.postgresql:postgresql:42.2.0'
+    implementation 'org.postgresql:postgresql:9.4.1207'
 
     // Alerter
     implementation 'com.github.tapadoo:alerter:7.2.4'

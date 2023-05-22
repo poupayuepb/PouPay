@@ -15,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.project.poupay.BuildConfig;
 import com.project.poupay.R;
+import com.project.poupay.alerts.MessageAlert;
 import com.project.poupay.sql.Sql;
 
 import java.sql.SQLException;
@@ -58,13 +59,14 @@ public class TelaLogin extends AppCompatActivity {
                             if (Objects.equals(result.getString("senha"), mPassword.getText().toString())) {
                                 Intent intent = new Intent(TelaLogin.this, MainActivity.class);
                                 startActivity(intent);
+                                finish();
                             } else {
                                 mPassword.setError("Senha incorreta.");
                             }
                         }
                         mUsername.setError("Usuário inexistente.");
                     } catch (SQLException e) {
-                        mUsername.setError("Usuário inexistente.");
+                        MessageAlert.create(this,  MessageAlert.TYPE_ERRO, getString(R.string.connection_error));
                     }
                     setLoadingMode(false);
                 }).start();
