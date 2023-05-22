@@ -11,6 +11,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.project.poupay.BuildConfig;
 import com.project.poupay.R;
 
 public class SplashScreen extends AppCompatActivity {
@@ -30,6 +31,8 @@ public class SplashScreen extends AppCompatActivity {
         img_logo = findViewById(R.id.img_logo);
         txt_namePouPay = findViewById(R.id.txt_namePouPay);
         txt_slogan = findViewById(R.id.txt_slogan);
+
+        ((TextView)findViewById(R.id.txt_versao)).setText(BuildConfig.VERSION_NAME);
 
         top = AnimationUtils.loadAnimation(this, R.anim.top);
         bottom = AnimationUtils.loadAnimation(this, R.anim.bottom);
