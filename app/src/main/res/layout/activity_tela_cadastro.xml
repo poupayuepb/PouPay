@@ -83,7 +83,7 @@
             android:inputType="text"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/background"
             android:textColorHint="#D5D5D5"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -104,7 +104,7 @@
             android:inputType="textPassword"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/background"
             android:textColorHint="#D5D5D5"
             android:textSize="14sp"
             android:textStyle="bold"
@@ -126,7 +126,7 @@
             android:inputType="textPassword"
             android:paddingStart="8sp"
             android:paddingEnd="8sp"
-            android:textColor="@color/purple"
+            android:textColor="@color/background"
             android:textColorHint="#D5D5D5"
             android:textSize="14sp"
             android:textStyle="bold" />
@@ -145,7 +145,7 @@
             android:layout_marginStart="50dp"
             android:layout_marginEnd="50dp"
             android:text="@string/btn_concluir"
-            android:textColor="@color/purple"
+            android:textColor="@color/background"
             android:textSize="20sp"
             app:backgroundTint="@null" />
 

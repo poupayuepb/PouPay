@@ -73,7 +73,7 @@
                 android:maxLength="20"
                 android:paddingStart="8sp"
                 android:paddingEnd="8sp"
-                android:textColor="@color/purple"
+                android:textColor="@color/background"
                 android:textColorHint="#D5D5D5"
                 android:textSize="14sp" />
 
@@ -95,7 +95,7 @@
                 android:maxLength="20"
                 android:paddingStart="8sp"
                 android:paddingEnd="8sp"
-                android:textColor="@color/purple"
+                android:textColor="@color/background"
                 android:textColorHint="#D5D5D5"
                 android:textSize="14sp" />
 
@@ -113,7 +113,7 @@
                 android:layout_marginLeft="50dp"
                 android:layout_marginRight="50dp"
                 android:text="@string/btn_entrar"
-                android:textColor="@color/purple"
+                android:textColor="@color/background"
                 android:textSize="20sp"
                 app:backgroundTint="@null" />
 
@@ -171,14 +171,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:src="@drawable/bg_ripplecircle"
-            app:tint="@color/purple_200" />
+            app:tint="@color/background" />
 
         <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_margin="12dp"
             android:src="@drawable/bg_ripplecircle"
-            app:tint="@color/purple" />
+            app:tint="@color/background2" />
 
         <LinearLayout
             android:layout_width="wrap_content"

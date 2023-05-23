@@ -1,25 +1,11 @@
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<shape xmlns:android="http://schemas.android.com/apk/res/android">
+    <gradient
+        android:type="linear"
+        android:angle="90"
+        android:startColor="#926D9F"
+        android:endColor="@color/background2"/>
 
-    <item>
-        <shape>
-            <gradient
-                android:type="linear"
-                android:angle="100"
-                android:startColor="#23013F"
-                android:endColor="#FFFFFF"
-                android:centerColor="#FFFFFF"
-                android:centerY="0.8333"
-                android:gradientRadius="100%p"/>
-        </shape>
-    </item>
-
-    <item>
-        <shape>
-            <solid android:color="#BF774887"/>
-        </shape>
-    </item>
-
-</layer-list>
+</shape>
 
 
 

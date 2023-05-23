@@ -15,7 +15,7 @@
         android:layout_height="wrap_content"
         android:text="@string/txt_value"
         android:textSize="16sp"
-        android:textColor="@color/purple"/>
+        android:textColor="@color/background"/>
 
     <EditText
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
         android:text="@string/txt_description"
         android:textSize="16sp"
         android:layout_marginTop="8dp"
-        android:textColor="@color/purple"/>
+        android:textColor="@color/background"/>
 
     <EditText
         android:layout_width="match_parent"
