@@ -18,6 +18,7 @@ import com.project.poupay.BuildConfig;
 import com.project.poupay.R;
 import com.project.poupay.alerts.MessageAlert;
 import com.project.poupay.sql.Sql;
+import com.project.poupay.validators.FieldValidator;
 
 import java.util.Objects;
 import java.util.regex.Pattern;
@@ -39,7 +40,7 @@ public class TelaCadastro extends AppCompatActivity {
         mPasswordConfirm = findViewById(R.id.edt_confirmarSenha);
         mProgressBar = findViewById(R.id.pgr_progressbar);
 
-        ((TextView)findViewById(R.id.txt_versao)).setText(BuildConfig.VERSION_NAME);
+        ((TextView) findViewById(R.id.txt_versao)).setText(BuildConfig.VERSION_NAME);
 
         mFinishButton.setOnClickListener(v -> signUp());
     }
@@ -92,27 +93,8 @@ public class TelaCadastro extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        boolean pass = true;
-
-        Pattern usernamePattern = Pattern.compile("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
-        Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{8,20}$");
-
-        if (!usernamePattern.matcher(mUsername.getText()).matches()) {
-            pass = false;
-            mUsername.setError("O nome de usuário deve conter apenas letras maiúsculas e minúsculas, underline e pontos.");
-        }
-        if (!passwordPattern.matcher(mPassword.getText()).matches()) {
-            pass = false;
-            mPassword.setError("A senha deve conter pelo menos um carácter minúsculo, um maiúsculo, um número e um carácter especial.");
-        }
-        if (mUsername.getText().length() == 0) {
-            pass = false;
-            mUsername.setError("Campo obrigatório.");
-        }
-        if (mPassword.getText().length() == 0) {
-            pass = false;
-            mPassword.setError("Campo obrigatório.");
-        }
+        boolean pass = FieldValidator.validate(mUsername, FieldValidator.TYPE_USERNAME)
+                && FieldValidator.validate(mPassword, FieldValidator.TYPE_PASSWORD);
         if (!mPassword.getText().toString().equals(mPasswordConfirm.getText().toString())) {
             pass = false;
             mPasswordConfirm.setError("As senhas não são íguais.");

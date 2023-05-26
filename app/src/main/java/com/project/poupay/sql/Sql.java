@@ -38,7 +38,6 @@ public class Sql extends Thread {
             } else{
                 mConnection.createStatement().executeUpdate(mQuery);
             }
-
         } catch (SQLException e) {
             queryException = e;
         } finally {

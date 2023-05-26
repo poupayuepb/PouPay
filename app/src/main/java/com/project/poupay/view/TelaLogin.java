@@ -17,6 +17,7 @@ import com.project.poupay.BuildConfig;
 import com.project.poupay.R;
 import com.project.poupay.alerts.MessageAlert;
 import com.project.poupay.sql.Sql;
+import com.project.poupay.validators.FieldValidator;
 
 import java.sql.SQLException;
 import java.util.Objects;
@@ -28,7 +29,6 @@ public class TelaLogin extends AppCompatActivity {
     private Button mSignInButton;
     private EditText mUsername, mPassword;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +39,7 @@ public class TelaLogin extends AppCompatActivity {
         mUsername = findViewById(R.id.edt_usuario);
         mPassword = findViewById(R.id.edt_senha);
 
-        ((TextView)findViewById(R.id.txt_versao)).setText(BuildConfig.VERSION_NAME);
+        ((TextView) findViewById(R.id.txt_versao)).setText(BuildConfig.VERSION_NAME);
 
         mSignUpButton.setOnClickListener(v -> {
             Intent intent = new Intent(TelaLogin.this, TelaCadastro.class);
@@ -52,8 +52,8 @@ public class TelaLogin extends AppCompatActivity {
             hideKeyboard();
             if (validateFields()) {
                 setLoadingMode(true);
-                String loginQuery = "SELECT nome, senha FROM usuarios  WHERE nome='" + mUsername.getText() + "'";
-                new Sql(this, loginQuery).setOnQueryCompleteListener((result,exception) -> {
+                String loginQuery = "SELECT nome, senha FROM usuarios WHERE nome='" + mUsername.getText() + "'";
+                new Sql(this, loginQuery).setOnQueryCompleteListener((result, exception) -> {
                     try {
                         while (result.next()) {
                             if (Objects.equals(result.getString("senha"), mPassword.getText().toString())) {
@@ -64,15 +64,13 @@ public class TelaLogin extends AppCompatActivity {
                                 mPassword.setError("Senha incorreta.");
                             }
                         }
-                        mUsername.setError("Usuário inexistente.");
                     } catch (SQLException e) {
-                        MessageAlert.create(this,  MessageAlert.TYPE_ERRO, getString(R.string.connection_error));
+                        MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.connection_error));
                     }
                     setLoadingMode(false);
                 }).start();
             }
         });
-
     }
 
     private void setLoadingMode(boolean active) {
@@ -98,27 +96,7 @@ public class TelaLogin extends AppCompatActivity {
     }
 
     private boolean validateFields() {
-        boolean pass = true;
-
-        Pattern usernamePattern = Pattern.compile("^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$");
-        Pattern passwordPattern = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()–{}:;',?/*~$^+=<>]).{8,20}$");
-
-        if (!usernamePattern.matcher(mUsername.getText()).matches()) {
-            pass = false;
-            mUsername.setError("O nome de usuário deve conter apenas letras maiúsculas e minúsculas, underline e pontos.");
-        }
-        if (!passwordPattern.matcher(mPassword.getText()).matches()) {
-            pass = false;
-            mPassword.setError("A senha deve conter pelo menos um carácter minúsculo, um maiúsculo, um número e um carácter especial.");
-        }
-        if (mUsername.getText().length() == 0) {
-            pass = false;
-            mUsername.setError("Campo obrigatório.");
-        }
-        if (mPassword.getText().length() == 0) {
-            pass = false;
-            mPassword.setError("Campo obrigatório.");
-        }
-        return pass;
+        return FieldValidator.validate(mUsername, FieldValidator.TYPE_USERNAME)
+                && FieldValidator.validate(mPassword, FieldValidator.TYPE_PASSWORD);
     }
 }
