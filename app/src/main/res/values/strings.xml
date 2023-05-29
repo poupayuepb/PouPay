@@ -38,4 +38,10 @@
     <string name="signup_finished">Cadastro Concluído</string>
     <string name="signup_sucess_text">Seu cadastro no PouPay foi realizado com sucesso. Clique no botão abaixo para voltar a tela de login para entrar com suas credenciais.</string>
     <string name="connection_error">Houve um problema com a comunicação com o servidor, cheque sua internet e tente novamente.</string>
+    <string name="txt_tittle_plane">Planejamentos</string>
+    <string name="txt_sub_plane">Qual é seu objetivo financeiro hoje?</string>
+    <string name="txt_plane1">Reserva de emergência</string>
+    <string name="txt_plane2">Viagens</string>
+    <string name="txt_plane3">Investimentos</string>
+    <string name="txt_plane4">Aquisição de um bem</string>
 </resources>

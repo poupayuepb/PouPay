@@ -15,6 +15,9 @@
         android:theme="@style/Theme.PouPay"
         tools:targetApi="31">
         <activity
+            android:name=".tela_planos"
+            android:exported="false" />
+        <activity
             android:name=".view.TelaCadastro"
             android:exported="false">
             <meta-data
