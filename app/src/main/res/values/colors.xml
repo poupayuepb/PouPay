@@ -5,6 +5,8 @@
     <color name="background">#774887</color>
     <color name="background2">#663A79</color>
     <color name="red">#E57373</color>
-    <color name="green">#81C784</color>
+    <color name="green">#0FA958</color>
     <color name="yellow">#FFB74D</color>
+    <color name="gray_light">#C9C9C9</color>
+
 </resources>

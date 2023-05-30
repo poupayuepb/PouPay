@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/sheet"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="20dp"
+    android:background="@drawable/dialog_rounded_bg"
+    android:gravity="center|top"
+    android:orientation="vertical">
+
+    <RadioGroup
+        android:id="@+id/radioGroup"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:id="@+id/rb_expense"
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_expense_selector"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:text="DESPESA"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+        <RadioButton
+            android:id="@+id/rb_revenue"
+            android:layout_width="150dp"
+            android:layout_height="36dp"
+            android:layout_weight="1"
+            android:background="@drawable/radio_button_revenue_uncheck"
+            android:button="@android:color/transparent"
+            android:checked="false"
+            android:text="RECEITA"
+            android:textAlignment="center"
+            android:textColor="@color/white" />
+
+    </RadioGroup>
+
+    <TextView
+        android:id="@+id/txt_value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16sp"
+        android:text="@string/txt_value"
+        android:textColor="@color/background"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center_horizontal"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginEnd="3dp"
+            android:layout_marginBottom="5dp"
+            android:text="R$"
+            android:textSize="16sp" />
+
+        <EditText
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/white"
+            android:hint="0,00"
+            android:inputType="number"
+            android:textAlignment="center"
+            android:textSize="30sp" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/txt_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="@string/txt_description"
+        android:textColor="@color/background"
+        android:textSize="16sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:hint="@string/hint_description"
+        android:inputType="text"
+        android:textSize="18sp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_type_pay"
+            android:button="@android:color/transparent"
+            android:checked="true"
+            android:drawableTop="@drawable/ic_payments_money"
+            android:padding="5dp"
+            android:text="Dinheiro"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_type_pay"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/ic_baseline_credit_card_36"
+            android:drawableTint="@color/background"
+            android:padding="5dp"
+            android:text="Cartão"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_type_pay"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/ic_baseline_pix_36"
+            android:drawableTint="@color/background"
+            android:padding="5dp"
+            android:text="Pix"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textSize="12sp" />
+
+        <RadioButton
+            android:layout_width="0dp"
+            android:layout_height="65dp"
+            android:layout_weight="1"
+            android:background="@drawable/selector_radio_type_pay"
+            android:button="@android:color/transparent"
+            android:drawableTop="@drawable/ic_barcode"
+            android:drawableTint="@color/background"
+            android:padding="5dp"
+            android:text="Outro"
+            android:textAlignment="center"
+            android:textColor="@color/background"
+            android:textSize="12sp" />
+
+    </RadioGroup>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:orientation="horizontal">
+
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="14dp"
+            android:layout_weight="1"
+            android:background="@drawable/custom_spinner" />
+        <!--android:visibility="gone"-->
+
+        <Button
+            android:id="@+id/btn_confirm"
+            style="@style/ButtonStyleStroke"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:text="@string/btn_confirm"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            app:backgroundTint="@null" />
+    </LinearLayout>
+
+</LinearLayout>
