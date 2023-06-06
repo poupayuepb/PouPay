@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".view.SplashScreen">
+    tools:context=".SplashActivity">
 
     <LinearLayout
-        android:id="@+id/ll_logo"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_above="@id/txt_info"
@@ -21,14 +19,15 @@
             android:id="@+id/img_logo"
             android:layout_width="145dp"
             android:layout_height="145dp"
-            android:src="@drawable/ic_baseline_savings_24" />
+            android:src="@drawable/ic_baseline_savings_24"
+            android:importantForAccessibility="no" />
 
         <TextView
             android:id="@+id/txt_namePouPay"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nova_square_regular"
-            android:text="PouPay"
+            android:text="@string/app_name"
             android:textColor="@color/white"
             android:textSize="48sp" />
 
@@ -36,7 +35,7 @@
             android:id="@+id/txt_slogan"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Gerencie suas Despesas e Receitas"
+            android:text="@string/app_subtitle"
             android:textColor="@color/white"
             android:textSize="14sp" />
 
@@ -56,14 +55,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:text="v01 - Teste"
             android:textColor="@color/white" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="12dp"
-            android:text="Desenvolvido pela Equipe PouPey\nToque aqui para saber mais."
+            android:text="@string/info"
             android:textAlignment="center"
             android:textColor="@color/white" />
 

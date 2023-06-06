@@ -2,28 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/reminder"
-        android:title="Lembretes"
+        android:title="@string/reminds"
         android:icon="@drawable/ic_baseline_notification_24"/>
 
     <item
-        android:id="@+id/graphic"
-        android:title="Relatórios"
+        android:title="@string/logs"
         android:icon="@drawable/ic_baseline_graphic_chart_24"/>
 
     <item
-        android:id="@+id/fab"
         android:title=""
         android:enabled="false"/>
 
     <item
-        android:id="@+id/plans"
-        android:title="Planos"
+        android:title="@string/plains"
         android:icon="@drawable/ic_baseline_plans_local_atm_24"/>
 
     <item
-        android:id="@+id/calculator"
-        android:title="Calculatora"
+        android:title="@string/calc"
         android:icon="@drawable/ic_baseline_calculate_24"/>
 
 </menu>

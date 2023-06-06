@@ -20,16 +20,6 @@
         <item name="android:fontFamily">@font/quicksand_regular</item>
     </style>
 
-    <style name="Modal" parent="Widget.Design.BottomSheet.Modal">
-        <item name="android:background">@drawable/dialog_rounded_bg</item>
-    </style>
-
-    <style name="BottomAddDialogStyle" parent="Theme.Design.Light.BottomSheetDialog">
-        <item name="bottomSheetStyle">@style/Modal</item>
-        <item name="android:windowIsFloating">false</item>
-        <item name="android:windowSoftInputMode">adjustResize</item>
-    </style>
-
     <style name="rounded_shap">
         <item name="cornerSize">50%</item>
     </style>

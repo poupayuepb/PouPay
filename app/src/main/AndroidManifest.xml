@@ -15,31 +15,32 @@
         android:theme="@style/Theme.PouPay"
         tools:targetApi="31">
         <activity
-            android:name=".tela_planos"
+            android:name=".PlansActivity"
             android:exported="false" />
         <activity
-            android:name=".view.TelaCadastro"
+            android:name=".SigninActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.TelaLogin"
+            android:name=".LoginActivity"
             android:exported="false">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.MainActivity"
-            android:exported="false">
+            android:name=".MainActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true">
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
         </activity>
         <activity
-            android:name=".view.SplashScreen"
+            android:name=".SplashActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -1,157 +1,321 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.MainActivity">
+    android:fitsSystemWindows="true"
+    tools:context=".MainActivity"
+    tools:ignore="RelativeOverlap">
 
-    <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_header"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/Main_List"
         android:layout_width="match_parent"
-        android:layout_height="170dp"
-        android:background="@drawable/bg_gradient"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/txt_date"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="8dp"
-        android:text="@string/txt_date"
-        android:textColor="@color/white"
-        android:textSize="14sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ImageView
-        android:id="@+id/logout"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_baseline_logout_24"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:layout_margin="8dp"/>
-
-    <TextView
-        android:id="@+id/txt_balance"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_date"
-        android:gravity="center"
-        android:text="@string/txt_balance"
-        android:textColor="@color/white"
-        android:textSize="18sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_date" />
-
-    <TextView
-        android:id="@+id/txt_balance_value"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/txt_balance"
-        android:gravity="center"
-        android:text="@string/txt_balance_value"
-        android:textColor="@color/white"
-        android:textSize="28sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txt_balance" />
+        android:layout_height="match_parent"
+        android:background="#E3E3E3"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:paddingHorizontal="12dp"
+        android:paddingTop="220dp"
+        android:paddingBottom="84dp"
+        android:scrollbars="vertical" />
 
     <RelativeLayout
-        android:id="@+id/rl_expenses_income"
-        android:layout_width="350dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:background="@drawable/container_components"
-        android:backgroundTint="#82FFFFFF"
-        android:gravity="center"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txt_balance_value">
+        android:id="@+id/Main_Header"
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:background="@drawable/bg_gradient_header"
+        android:elevation="4dp">
 
         <TextView
-            android:id="@+id/txt_income_value"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentStart="true"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="6dp"
-            android:layout_marginBottom="6dp"
-            android:text="@string/txt_income_value"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:drawableLeftCompat="@drawable/ic_baseline_arrow_circle_down_24" />
+            android:layout_alignParentTop="true"
+            android:layout_margin="6dp"
+            android:text="@string/txt_date"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="6dp"
+            android:contentDescription="@string/logout"
+            android:src="@drawable/ic_baseline_logout_24" />
 
         <TextView
-            android:id="@+id/txt_expenses_value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentEnd="true"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="6dp"
-            android:layout_marginEnd="50dp"
-            android:layout_marginBottom="6dp"
-            android:text="@string/txt_expenses_value"
-            android:textColor="@color/black"
-            android:textSize="16sp"
-            app:drawableStartCompat="@drawable/ic_baseline_arrow_circle_up_24" />
-    </RelativeLayout>
-
-    <FrameLayout
-        android:id="@+id/frameLayoutMain"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/toolbar_header"
-        android:paddingBottom="66dp"/>
-
-    <androidx.coordinatorlayout.widget.CoordinatorLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.google.android.material.bottomappbar.BottomAppBar
-            android:id="@+id/bottomAppBar"
+            android:id="@+id/txt_balance_value"
             android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_gravity="bottom"
-            android:backgroundTint="@color/background"
-            app:fabCradleMargin="10dp"
-            app:fabCradleRoundedCornerRadius="50dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:gravity="center"
+            android:text="@string/value_placeholder"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
 
-            <com.google.android.material.bottomnavigation.BottomNavigationView
-                android:id="@+id/bottomNavigationView"
+        <RelativeLayout
+            android:id="@+id/Main_LayoutInputsOutputs"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_balance_value"
+            android:layout_centerHorizontal="true"
+            android:layout_marginHorizontal="24dp"
+            android:layout_marginVertical="6dp"
+            android:background="@drawable/container_components"
+            android:backgroundTint="#82FFFFFF"
+            app:layout_constraintTop_toBottomOf="@id/txt_balance_value">
+
+            <TextView
+                android:id="@+id/Main_Header_Out"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginEnd="20dp"
-                android:background="@android:color/transparent"
-                app:elevation="0dp"
-                app:itemIconTint="@color/white"
-                app:itemTextColor="@color/white"
-                app:labelVisibilityMode="labeled"
-                app:menu="@menu/bottom_menu" />
+                android:layout_alignParentStart="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="6dp"
+                android:layout_marginBottom="6dp"
+                android:text="@string/value_placeholder"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:drawableLeftCompat="@drawable/ic_baseline_arrow_circle_down_24" />
 
-        </com.google.android.material.bottomappbar.BottomAppBar>
+            <TextView
+                android:id="@+id/Main_Header_In"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginStart="6dp"
+                android:layout_marginTop="6dp"
+                android:layout_marginEnd="50dp"
+                android:layout_marginBottom="6dp"
+                android:text="@string/value_placeholder"
+                android:textColor="@color/black"
+                android:textSize="16sp"
+                app:drawableStartCompat="@drawable/ic_baseline_arrow_circle_up_24" />
+        </RelativeLayout>
 
-        <com.google.android.material.floatingactionbutton.FloatingActionButton
-            android:id="@+id/btn_add"
+        <TextView
+            android:id="@+id/Main_Title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Main_LayoutInputsOutputs"
+            android:gravity="center"
+            android:text="@string/main_title"
+            android:textColor="@color/white"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/Main_Subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/Main_Title"
+            android:gravity="center"
+            android:textColor="@color/white"
+            android:textSize="14sp" />
+    </RelativeLayout>
+
+    <com.project.poupay.view.SwitchSelector
+        android:id="@+id/Main_FilterSelector"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_marginHorizontal="24dp"
+        android:elevation="4dp"
+        app:layout_anchor="@id/Main_Header"
+        app:layout_anchorGravity="bottom"
+
+
+        app:options_list="@array/switchselector_date_filters"
+        app:text_size="13sp" />
+
+    <com.google.android.material.bottomappbar.BottomAppBar
+        android:id="@+id/bottomAppBar"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_gravity="bottom"
+        android:backgroundTint="@color/background"
+        app:fabCradleMargin="10dp"
+        app:fabCradleRoundedCornerRadius="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <com.google.android.material.bottomnavigation.BottomNavigationView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:backgroundTint="@color/background"
-            android:src="@drawable/ic_baseline_add_24"
-            app:layout_anchor="@id/bottomAppBar"
-            app:maxImageSize="40dp" />
+            android:layout_gravity="center"
+            android:layout_marginEnd="20dp"
+            android:background="@android:color/transparent"
+            app:elevation="0dp"
+            app:itemIconTint="@color/white"
+            app:itemTextColor="@color/white"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/bottom_menu" />
 
-    </androidx.coordinatorlayout.widget.CoordinatorLayout>
-</androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.bottomappbar.BottomAppBar>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_add"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/background"
+        android:contentDescription="@string/add"
+        android:src="@drawable/ic_baseline_add_24"
+        app:layout_anchor="@id/bottomAppBar"
+        app:maxImageSize="40dp" />
+
+    <ImageView
+        android:id="@+id/Main_Ripple"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_gravity="center_horizontal|bottom"
+        android:clickable="true"
+        android:elevation="4dp"
+        android:focusable="true"
+        android:importantForAccessibility="no"
+        android:src="@drawable/bg_middle_button"
+        app:tint="#56000000" />
+
+    <LinearLayout
+        android:id="@+id/Main_AddLayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/bottom_add_layout_height"
+        android:layout_gravity="bottom"
+        android:layout_marginStart="4dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/dialog_rounded_bg"
+        android:elevation="4dp"
+        android:gravity="center_horizontal"
+        android:orientation="vertical"
+        android:translationY="@dimen/bottom_add_layout_height">
+
+        <com.project.poupay.view.SwitchSelector
+            android:id="@+id/Add_InputType"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="12dp"
+            app:options_list="@array/switchselector_inputType"
+            app:text_size="14sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:text="@string/txt_value"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.marcoscg.currencyedittext.CurrencyEditText
+            android:id="@+id/Add_Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:textAlignment="textStart"
+            android:textColor="@color/background"
+            android:textColorHint="#B7B7B7"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/txt_description"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/Add_Details"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_text"
+            android:gravity="center"
+            android:hint="@string/hint_description"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:lines="1"
+            android:padding="4dp"
+            android:textColor="@color/background"
+            android:textColorHint="#B7B7B7"
+            android:textSize="18sp" />
+
+        <com.project.poupay.view.SwitchSelector
+            android:id="@+id/Add_Type"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:layout_marginTop="8dp"
+            app:options_list="@array/switchselector_paymentType"
+            app:text_size="14sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:orientation="horizontal">
+
+            <com.skydoves.powerspinner.PowerSpinnerView
+                android:id="@+id/Add_CardOptions"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_marginEnd="14dp"
+                android:layout_weight="1"
+                android:background="@drawable/coustom_editext"
+                android:backgroundTint="@color/background"
+                android:gravity="center"
+                android:paddingHorizontal="6dp"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:spinner_arrow_gravity="end"
+                app:spinner_divider_color="@color/white"
+                app:spinner_divider_show="true"
+                app:spinner_divider_size="1dp"
+                app:spinner_item_height="39dp"
+                app:spinner_popup_animation="bounce"
+                app:spinner_popup_background="@color/background"
+                app:spinner_popup_elevation="14dp"
+                app:spinner_popup_height="160dp" />
+
+            <Button
+                android:id="@+id/Add_Confirm"
+                style="@style/ButtonStyleStroke"
+                android:layout_width="0dp"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:padding="0dp"
+                android:text="@string/btn_confirm"
+                android:textColor="@color/background"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                app:backgroundTint="@null" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+
+    <ProgressBar
+        android:id="@+id/Main_ProgressBarCenter"
+        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:paddingTop="220dp"
+        android:paddingBottom="84dp"
+        android:layout_gravity="center"
+        android:elevation="10dp"
+        android:indeterminate="true"
+        android:indeterminateTint="@color/background"
+        android:visibility="visible" />
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

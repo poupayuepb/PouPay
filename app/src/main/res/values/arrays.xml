@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="switchselector_inputType">
+        <item>DESPESA</item>
+        <item>RECEITA</item>
+    </string-array>
+    <string-array name="switchselector_paymentType">
+        <item>Dinheiro</item>
+        <item>Cartão</item>
+        <item>Pix</item>
+        <item>Outro</item>
+    </string-array>
+    <string-array name="switchselector_date_filters">
+
+        <item>DIA</item>
+        <item>MÊS</item>
+        <item>ANO</item>
+        <item>FILTRO</item>
+
+    </string-array>
+</resources>

@@ -8,5 +8,8 @@
     <color name="green">#0FA958</color>
     <color name="yellow">#FFB74D</color>
     <color name="gray_light">#C9C9C9</color>
+    <color name="blue">#42A5F5</color>
+    <color name="orange">#FF7043</color>
+    <color name="pix">#2EBDAF</color>
 
 </resources>

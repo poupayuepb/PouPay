@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_gradient"
-    tools:context=".view.SplashScreen"
+    tools:context=".SplashActivity"
     tools:ignore="ContentDescription">
 
     <RelativeLayout
@@ -13,7 +13,6 @@
         android:layout_height="match_parent">
 
         <LinearLayout
-            android:id="@+id/ll_logo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@id/ll_info"
@@ -46,7 +45,6 @@
                 android:textSize="14sp" />
 
             <TextView
-                android:id="@+id/txt_login"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="18dp"
@@ -61,21 +59,22 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="50dp"
-                android:textStyle="bold"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="18dp"
                 android:layout_marginRight="50dp"
                 android:background="@drawable/coustom_editext"
                 android:drawableStart="@drawable/ic_baseline_person_24"
                 android:elevation="6dp"
+                android:gravity="center"
                 android:hint="@string/hint_usuario"
                 android:importantForAutofill="no"
                 android:inputType="text"
                 android:maxLength="20"
                 android:paddingStart="8sp"
-                android:paddingEnd="8sp"
+                android:paddingEnd="36sp"
                 android:textColor="@color/background"
                 android:textColorHint="#D5D5D5"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
 
             <EditText
                 android:id="@+id/edt_senha"
@@ -88,22 +87,24 @@
                 android:background="@drawable/coustom_editext"
                 android:drawableStart="@drawable/ic_baseline_lock_24"
                 android:elevation="6dp"
+                android:gravity="center"
                 android:hint="@string/hint_senha"
                 android:importantForAutofill="no"
                 android:inputType="textPassword"
-                android:textStyle="bold"
                 android:maxLength="20"
                 android:paddingStart="8sp"
-                android:paddingEnd="8sp"
+                android:paddingEnd="36sp"
                 android:textColor="@color/background"
                 android:textColorHint="#D5D5D5"
-                android:textSize="14sp" />
+                android:textSize="14sp"
+                android:textStyle="bold" />
+
 
             <ImageView
                 android:layout_width="200dp"
                 android:layout_height="2dp"
-                android:layout_margin="32dp"
-                android:src="@drawable/solid_white"/>
+                android:layout_margin="24dp"
+                android:src="@drawable/solid_white" />
 
             <Button
                 android:id="@+id/btn_entrar"
@@ -117,11 +118,19 @@
                 android:textSize="20sp"
                 app:backgroundTint="@null" />
 
+            <CheckBox
+                android:id="@+id/Login_Save"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:buttonTint="@color/white"
+                android:gravity="center"
+                android:text="@string/save_login"
+                android:textColor="@color/white" />
+
             <TextView
                 android:id="@+id/txt_cadastrarse"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
                 android:text="@string/txt_cadastrarse"
                 android:textAllCaps="true"
                 android:textColor="@color/white"

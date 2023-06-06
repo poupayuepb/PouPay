@@ -1,18 +1,14 @@
 package com.project.poupay;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
-import com.project.poupay.validators.FieldValidator;
-
+import com.project.poupay.tools.FieldValidator;
 import org.junit.Test;
 
 public class ExampleUnitTest {
     @Test
     public void field_validation() {
-        assertEquals(4, 2 + 2);
-
         // Valid usernames
         assertTrue(FieldValidator.validate("nome.usuario", FieldValidator.TYPE_USERNAME));
         assertTrue(FieldValidator.validate("nome_usuario", FieldValidator.TYPE_USERNAME));

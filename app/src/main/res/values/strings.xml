@@ -1,24 +1,12 @@
 <resources>
     <string name="app_name">PouPay</string>
     <string name="txt_date">14 de agosto</string>
-    <string name="txt_balance">SALDO</string>
-    <string name="txt_expenses_value">R$ 1.300</string>
-    <string name="txt_income_value">R$ 2.300</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="chip_month">Mês</string>
-    <string name="chip_day">Dia</string>
-    <string name="chip_year">Ano</string>
-    <string name="chip_week">Semana</string>
     <string name="txt_totValue">R$ 450,00</string>
     <string name="txt_description_value">Produto</string>
     <string name="txt_payment_type">Dinheiro</string>
-    <string name="txt_balance_value">1.500</string>
     <string name="txt_value">Valor</string>
     <string name="txt_description">Descrição</string>
     <string name="hint_description">Roupa, mercado, lanche…</string>
-    <string name="rb_money">Dinheiro</string>
-    <string name="rb_card">Cartão</string>
-    <string name="rb_other">Outro</string>
     <string name="btn_confirm">Confirmar</string>
     <string name="hint_usuario">Nome do usuário</string>
     <string name="hint_senha">Digite sua senha</string>
@@ -44,4 +32,19 @@
     <string name="txt_plane2">Viagens</string>
     <string name="txt_plane3">Investimentos</string>
     <string name="txt_plane4">Aquisição de um bem</string>
+    <string name="logout">Sair do PouPay</string>
+    <string name="add">Adicionar Informação</string>
+    <string name="main_title">Despesas e Receitas</string>
+    <string name="save_login">Salvar Credenciais</string>
+    <string name="app_subtitle">Gerencie suas Despesas e Receitas</string>
+    <string name="info">Desenvolvido pela Equipe PouPey\nToque aqui para saber mais.</string>
+    <string name="subtitle_days">Últimos 7 Dias</string>
+    <string name="subtitle_month">Último Ano</string>
+    <string name="subtitle_year">Lançamentos Anuais</string>
+    <string name="sqlerror">Não foi possível se comunicar com o servidor. Verifique sua conexão e tente novamente.</string>
+    <string name="value_placeholder">R$ -</string>
+    <string name="reminds">Lembretes</string>
+    <string name="logs">Relatórios</string>
+    <string name="plains">Planos</string>
+    <string name="calc">Calculadora</string>
 </resources>

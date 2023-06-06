@@ -4,6 +4,10 @@
         android:endColor="@color/background2"
         android:startColor="#926D9F"
         android:type="linear" />
+    <corners
+        android:bottomLeftRadius="24dp"
+        android:bottomRightRadius="24dp" />
+
 </shape>
 
 
