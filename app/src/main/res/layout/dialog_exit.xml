@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Back_Main"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#28000000"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/logout"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        app:drawableTopCompat="@drawable/ic_baseline_logout_24" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:maxWidth="600dp"
+        android:padding="12dp"
+        android:text="@string/logout_text"
+        android:textColor="@color/white"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/Back_Cancel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="12dp"
+        android:background="@drawable/bg_ripple_button"
+        android:drawablePadding="-24dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/cancel"
+        android:textColor="@color/background"
+
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_back"
+        app:drawableTint="@color/background" />
+
+    <TextView
+        android:id="@+id/Back_LogOut"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_ripple_button"
+        android:drawablePadding="-24dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/logout_account"
+        android:textColor="@color/background"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_baseline_logout_24"
+        app:drawableTint="@color/background" />
+
+    <TextView
+        android:id="@+id/Back_Close"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:layout_marginBottom="12dp"
+        android:background="@drawable/bg_ripple_button"
+        android:drawablePadding="-24dp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:text="@string/close_app"
+        android:textColor="@color/background"
+        android:textStyle="bold"
+        app:drawableStartCompat="@drawable/ic_close"
+        app:drawableTint="@color/background" />
+
+</LinearLayout>
+

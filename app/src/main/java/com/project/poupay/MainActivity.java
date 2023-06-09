@@ -1,6 +1,9 @@
 package com.project.poupay;
 
 import android.animation.ValueAnimator;
+import android.app.Dialog;
+import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -14,6 +17,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import androidx.core.util.Pair;
@@ -24,6 +28,7 @@ import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marcoscg.currencyedittext.CurrencyEditText;
 import com.project.poupay.alerts.MessageAlert;
+import com.project.poupay.sql.Preferences;
 import com.project.poupay.sql.User;
 import com.project.poupay.view.ListContentAdapter;
 import com.project.poupay.view.SwitchSelector;
@@ -60,14 +65,32 @@ public class MainActivity extends AppCompatActivity {
         adapter = new ListContentAdapter();
         mList.setAdapter(adapter);
 
-
         mFilterSelector = findViewById(R.id.Main_FilterSelector);
         mFilterSelector.setOnSelectChangeListener((id, text) -> update(id));
         mFilterSelector.setSelectedButton(0);
 
         findViewById(R.id.btn_add).setOnClickListener(v -> showAddDialog(null));
+        findViewById(R.id.Main_Logout).setOnClickListener(v -> onBackPressed());
         initAddView();
+    }
 
+    @Override
+    public void onBackPressed() {
+        View alertContent = getLayoutInflater().inflate(R.layout.dialog_exit, findViewById(R.id.Back_Main));
+        AlertDialog.Builder alert = new AlertDialog.Builder(this);
+        alert.setCancelable(false);
+        alert.setView(alertContent);
+        Dialog dialog = alert.show();
+        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
+        alertContent.findViewById(R.id.Back_Cancel).setOnClickListener(v -> dialog.dismiss());
+        alertContent.findViewById(R.id.Back_Close).setOnClickListener(v -> finishAndRemoveTask());
+        alertContent.findViewById(R.id.Back_LogOut).setOnClickListener(v -> {
+            Preferences.set(Preferences.REMIND_LOGIN_ENABLED, false, this);
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+            finish();
+        });
     }
 
     private void setLoadingMode(boolean enabled) {
@@ -80,7 +103,8 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.txt_balance_value)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(total));
             ((TextView) findViewById(R.id.Main_Header_Out)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(despesa));
             ((TextView) findViewById(R.id.Main_Header_In)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(receita));
-        }, exception -> MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.sqlerror)));
+            setLoadingMode(false);
+        }, exception -> showErroMessage(R.string.sqlerror));
     }
 
     public void update(int indexFilter) {
@@ -91,33 +115,11 @@ public class MainActivity extends AppCompatActivity {
         ((TextView) findViewById(R.id.Main_Header_In)).setText("R$ -");
         setLoadingMode(true);
 
-        if (indexFilter == 0) {
-            mSubtitle.setText(R.string.subtitle_days);
-            User.getEntry(this, User.FILTER_DAY, newItems -> {
-                adapter.add(newItems);
-                updateHeader();
-                setLoadingMode(false);
-            }, exception -> MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.sqlerror)));
-        } else if (indexFilter == 1) {
-            mSubtitle.setText(R.string.subtitle_month);
-            User.getEntry(this, User.FILTER_MONTH, newItems -> {
-                adapter.add(newItems);
-                updateHeader();
-                setLoadingMode(false);
-            }, exception -> MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.sqlerror)));
-        } else if (indexFilter == 2) {
-            mSubtitle.setText(R.string.subtitle_year);
-            User.getEntry(this, User.FILTER_YEAR, newItems -> {
-                adapter.add(newItems);
-                updateHeader();
-                setLoadingMode(false);
-            }, exception -> MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.sqlerror)));
-        } else if (indexFilter == 3) {
-            MaterialDatePicker.Builder<Pair<Long, Long>> materialDateBuilder = MaterialDatePicker.Builder.dateRangePicker();
-            materialDateBuilder.setTitleText("SELECIONE UM INTERVALO");
-            materialDateBuilder.setPositiveButtonText("Filtrar");
-            final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = materialDateBuilder.build();
+        if (indexFilter == 3) {
+            final MaterialDatePicker<Pair<Long, Long>> materialDatePicker = MaterialDatePicker.Builder.dateRangePicker().setTitleText("SELECIONE UM INTERVALO").setPositiveButtonText("Filtrar").build();
             materialDatePicker.show(getSupportFragmentManager(), "MATERIAL_DATE_PICKER");
+            materialDatePicker.addOnCancelListener(dialog -> mFilterSelector.setSelectedButton(0));
+            materialDatePicker.addOnNegativeButtonClickListener(dialog -> mFilterSelector.setSelectedButton(0));
             materialDatePicker.addOnPositiveButtonClickListener(selection -> {
                 long initDate = selection.first;
                 long finalDate = selection.second;
@@ -132,9 +134,16 @@ public class MainActivity extends AppCompatActivity {
                 User.getEntry(this, initDate, finalDate, newItems -> {
                     adapter.add(newItems);
                     updateHeader();
-                    setLoadingMode(false);
-                }, exception -> MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.sqlerror)));
+                }, exception -> showErroMessage(R.string.sqlerror));
             });
+        } else {
+            if (indexFilter == 0) mSubtitle.setText(R.string.subtitle_days);
+            else if (indexFilter == 1) mSubtitle.setText(R.string.subtitle_month);
+            else mSubtitle.setText(R.string.subtitle_year);
+            User.getEntry(this, indexFilter, newItems -> {
+                adapter.add(newItems);
+                updateHeader();
+            }, exception -> showErroMessage(R.string.sqlerror));
         }
     }
 
@@ -159,23 +168,23 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 updateCardSpinner();
-                moneyPortion.setVisibility(moneyType.getSelectedId() == 1 && inputType.getSelectedId() == 0 && value.getNumericValue() >=1 ? View.VISIBLE : View.GONE);
+                moneyPortion.setVisibility(moneyType.getSelectedId() == 1 && inputType.getSelectedId() == 0 && value.getNumericValue() >= 1 ? View.VISIBLE : View.GONE);
             }
         });
 
 
         inputType.setOnSelectChangeListener((id, text) -> {
             value.setTextColor(getResources().getColor(id == 0 ? R.color.red : R.color.green));
-            moneyPortion.setVisibility(moneyType.getSelectedId() == 1 && id == 0 && value.getNumericValue() >=1 ? View.VISIBLE : View.GONE);
+            moneyPortion.setVisibility(moneyType.getSelectedId() == 1 && id == 0 && value.getNumericValue() >= 1 ? View.VISIBLE : View.GONE);
         });
         inputType.setSelectedButton(0);
 
         moneyType.setButtonIcon(0, R.drawable.ic_payments_money);
         moneyType.setButtonIcon(1, R.drawable.ic_baseline_credit_card_36);
         moneyType.setButtonIcon(2, R.drawable.ic_baseline_pix_36);
-        moneyType.setButtonIcon(3, R.drawable.ic_barcode);
+        moneyType.setButtonIcon(3, R.drawable.ic_payment_other_36);
         moneyType.setOnSelectChangeListener((id, text) -> {
-            moneyPortion.setVisibility(id == 1 && inputType.getSelectedId() == 0 && value.getNumericValue() >=1 ? View.VISIBLE : View.GONE);
+            moneyPortion.setVisibility(id == 1 && inputType.getSelectedId() == 0 && value.getNumericValue() >= 1 ? View.VISIBLE : View.GONE);
             updateCardSpinner();
         });
 
@@ -186,14 +195,16 @@ public class MainActivity extends AppCompatActivity {
                 int sqlCategory = moneyType.getSelectedId();
                 Integer sqlPortion = null;
                 if (moneyType.getSelectedId() == 1) sqlPortion = moneyPortion.getSelectedIndex() + 1;
-                User.addEntry(sqlValue, sqlDesc, sqlCategory, sqlPortion, this, () -> MessageAlert.create(MainActivity.this, MessageAlert.TYPE_SUCESS, "Lançamento inserido com sucesso."), exception -> MessageAlert.create(MainActivity.this, MessageAlert.TYPE_ERRO, "Aconteceu um problema ao se comunicar com o servidor. Verifique sua conexão e tente novamente."));
+                User.addEntry(sqlValue, sqlDesc, sqlCategory, sqlPortion, this, () -> {
+                    MessageAlert.create(MainActivity.this, MessageAlert.TYPE_SUCESS, "Lançamento inserido com sucesso.");
+                    update(indexFilter);
+                }, exception -> showErroMessage(R.string.sqlerror));
                 showAddDialog(false);
                 inputType.setSelectedButton(0);
                 moneyType.setSelectedButton(0);
                 value.setText("0");
                 details.setText("");
                 hideKeyboard();
-                update(indexFilter);
             }
         });
     }
@@ -271,7 +282,7 @@ public class MainActivity extends AppCompatActivity {
         List<String> spinnerArray = new ArrayList<>();
 
         for (int i = 1; i <= 48; i++) {
-            if(value.getNumericValue() / i >= 1)
+            if (value.getNumericValue() / i >= 1)
                 spinnerArray.add(i + "x de " + NumberFormat.getCurrencyInstance(Locale.getDefault()).format(value.getNumericValue() / i));
         }
 
@@ -279,6 +290,11 @@ public class MainActivity extends AppCompatActivity {
         spinnerAdapter.setItems(spinnerArray);
         spinnerCard.setSpinnerAdapter(spinnerAdapter);
 
-        if(spinnerArray.size()>0)spinnerCard.selectItemByIndex(0);
+        if (spinnerArray.size() > 0) spinnerCard.selectItemByIndex(0);
+    }
+
+    private void showErroMessage(int id) {
+        MessageAlert.create(MainActivity.this, MessageAlert.TYPE_ERRO, getString(id));
+        setLoadingMode(false);
     }
 }

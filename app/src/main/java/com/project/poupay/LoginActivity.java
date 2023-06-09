@@ -78,7 +78,7 @@ public class LoginActivity extends AppCompatActivity {
                                 mPassword.setError("Senha incorreta.");
                             }
                         }
-                        if(emptyUser) MessageAlert.create(this, MessageAlert.TYPE_ERRO, "Usuário não cadastrado.");
+                        if (emptyUser) MessageAlert.create(this, MessageAlert.TYPE_ERRO, "Usuário não cadastrado.");
                     } catch (SQLException e) {
                         MessageAlert.create(this, MessageAlert.TYPE_ERRO, getString(R.string.connection_error));
                     }
@@ -118,6 +118,8 @@ public class LoginActivity extends AppCompatActivity {
                         .setNegativeButtonText("Inserir Senha Manualmente")
                         .build();
                 biometricPrompt.authenticate(promptInfo);
+            } else{
+                mPassword.requestFocus();
             }
 
             mUsername.setText(Preferences.getString(Preferences.REMIND_LOGIN_USERNAME, "", LoginActivity.this));

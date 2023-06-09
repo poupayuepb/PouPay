@@ -47,4 +47,9 @@
     <string name="logs">Relatórios</string>
     <string name="plains">Planos</string>
     <string name="calc">Calculadora</string>
+    <string name="a">Aconteceu um problema ao se comunicar com o servidor. Verifique sua conexão e tente novamente.</string>
+    <string name="logout_text">Selecione entre sair do aplicativo ou sair da sua conta.</string>
+    <string name="cancel">Cancelar</string>
+    <string name="close_app">Fechar o Aplicativo</string>
+    <string name="logout_account">Sair da Conta</string>
 </resources>

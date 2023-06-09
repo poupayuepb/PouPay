@@ -56,8 +56,6 @@ public class SwitchSelector extends LinearLayout {
                     newTextView.setTextSize(TypedValue.COMPLEX_UNIT_PX, fontSize);
                     newTextView.setTypeface(null, Typeface.BOLD);
                     newTextView.setText(text);
-                    newTextView.setPadding(0, 20, 0, 20);
-
                     newTextView.setOnClickListener(v -> {
                         if (this.isEnabled) setSelectedButton((TextView) v);
                     });
@@ -108,6 +106,8 @@ public class SwitchSelector extends LinearLayout {
         Drawable icon = ResourcesCompat.getDrawable(mContext.getResources(), drawableId, null);
         Objects.requireNonNull(icon).setTint(Color.WHITE);
         mButtons.get(buttonId).setCompoundDrawablesWithIntrinsicBounds(null, icon, null, null);
+        mButtons.get(buttonId).setCompoundDrawablePadding(-20);
+        mButtons.get(buttonId).setPadding(0, 20, 0, 0);
     }
 
     public interface OnSelectChangeListener {

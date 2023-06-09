@@ -43,7 +43,6 @@ public class User {
                         "AND usuario_nome = '" + username + "'\n" +
                         "ORDER BY data DESC";
                 break;
-
             case FILTER_MONTH:
                 query = "SELECT sum(valor) as valor,to_char(date_trunc('month', data), 'YYYY-MM-01') as month,categoria_id,nome as categoria FROM transacoes \n" +
                         "INNER JOIN categorias c ON categoria_id = c.id\n" +
@@ -62,9 +61,8 @@ public class User {
                 break;
         }
         new Sql(context, query).setOnQueryCompleteListener((result, queryException) -> {
-            if (queryException != null) {
-                failedListener.onFailed(queryException);
-            } else {
+            if (queryException != null) failedListener.onFailed(queryException);
+            else {
                 try {
                     List<ContentItem> contents = new ArrayList<>();
                     while (result.next()) {
@@ -80,7 +78,6 @@ public class User {
                                 int parcelas = result.getInt("parcelas");
                                 contents.add(new ContentItem(context, id, data, descricao, categoria, categoria_id, valor));
                                 break;
-
                             case FILTER_MONTH:
                                 data = new SimpleDateFormat("MMMM", Locale.getDefault()).format(Date.valueOf(result.getString("month"))) + " de " + new SimpleDateFormat("yyyy", Locale.getDefault()).format(Date.valueOf(result.getString("month")));
                                 contents.add(new ContentItem(context, -1, data, categoria, "", categoria_id, valor));
@@ -110,7 +107,6 @@ public class User {
         calendar.setTimeInMillis(dateEnd);
         String dateEndFormated = format.format(calendar.getTime());
 
-
         String query = "SELECT transacoes.id,valor,data,descricao,categoria_id,nome as categoria,parcelas FROM transacoes \n" +
                 "INNER JOIN categorias c ON categoria_id = c.id\n" +
                 "WHERE data >= '" + dateInitFormated + " 00:00:00'::timestamp \n" +
@@ -119,9 +115,8 @@ public class User {
                 "ORDER BY data DESC";
 
         new Sql(context, query).setOnQueryCompleteListener((result, queryException) -> {
-            if (queryException != null) {
-                failedListener.onFailed(queryException);
-            } else {
+            if (queryException != null) failedListener.onFailed(queryException);
+            else {
                 try {
                     List<ContentItem> contents = new ArrayList<>();
                     while (result.next()) {
@@ -147,13 +142,10 @@ public class User {
     public static void getHeader(Context context, OnSqlGetHeaderOperationSucessListener sucessListener, OnSqlOperationFailedListener failedListener) {
         String query = "SELECT sum(valor) as total, sum(valor) filter (where valor >= 0) as receita, sum(valor) filter (where valor < 0) as despesa FROM transacoes WHERE usuario_nome = '" + username + "';";
         new Sql(context, query).setOnQueryCompleteListener((result, queryException) -> {
-            if (queryException != null) {
-                failedListener.onFailed(queryException);
-            } else {
+            if (queryException != null) failedListener.onFailed(queryException);
+            else {
                 try {
-                    double total = 0;
-                    double despesa = 0;
-                    double receita = 0;
+                    double total = 0, despesa = 0, receita = 0;
                     while (result.next()) {
                         total = result.getDouble("total");
                         despesa = result.getDouble("despesa");
@@ -166,7 +158,6 @@ public class User {
             }
         }).start();
     }
-
 
     public interface OnSqlAddOperationSucessListener {
         void onSucess();

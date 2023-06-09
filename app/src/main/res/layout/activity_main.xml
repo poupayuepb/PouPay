@@ -38,11 +38,15 @@
             android:textSize="16sp" />
 
         <ImageView
+            android:id="@+id/Main_Logout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentTop="true"
             android:layout_alignParentEnd="true"
-            android:layout_margin="6dp"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
             android:contentDescription="@string/logout"
             android:src="@drawable/ic_baseline_logout_24" />
 
@@ -308,8 +312,8 @@
     <ProgressBar
         android:id="@+id/Main_ProgressBarCenter"
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
         android:paddingTop="220dp"
         android:paddingBottom="84dp"
         android:layout_gravity="center"

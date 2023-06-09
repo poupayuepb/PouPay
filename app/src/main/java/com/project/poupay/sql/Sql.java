@@ -11,7 +11,8 @@ import java.sql.SQLException;
 public class Sql extends Thread {
     private final String mQuery;
     private final Activity mContext;
-    private OnQueryCompleteListener onQueryCompleteListener = (result, queryException) -> {};
+    private OnQueryCompleteListener onQueryCompleteListener = (result, queryException) -> {
+    };
     private static Connection mConnection;
 
     public Sql(Context context, String query) {
@@ -24,8 +25,7 @@ public class Sql extends Thread {
         super.run();
         try {
             Class.forName("org.postgresql.Driver");
-        }
-        catch (java.lang.ClassNotFoundException e) {
+        } catch (java.lang.ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
         ResultSet result = null;
@@ -33,13 +33,11 @@ public class Sql extends Thread {
         try {
             if (mConnection != null) while (true) if (mConnection.isClosed()) break;
             mConnection = DriverManager.getConnection("jdbc:postgresql://silly.db.elephantsql.com:5432/tbvikyyo", "tbvikyyo", "HNe_vfCMwGEjTSczo-5xH-cmMoOaUJJN");
-            if(mQuery.startsWith("SELECT")){
-                result = mConnection.createStatement().executeQuery(mQuery);
-            } else{
-                mConnection.createStatement().executeUpdate(mQuery);
-            }
+            if (mQuery.startsWith("SELECT")) result = mConnection.createStatement().executeQuery(mQuery);
+            else mConnection.createStatement().executeUpdate(mQuery);
         } catch (SQLException e) {
             queryException = e;
+            System.out.println(e.getMessage());
         } finally {
             try {
                 if (mConnection != null) mConnection.close();
@@ -52,7 +50,7 @@ public class Sql extends Thread {
         mContext.runOnUiThread(() -> onQueryCompleteListener.onQueryComplete(finalResult, finalQueryException));
     }
 
-    public Sql setOnQueryCompleteListener(OnQueryCompleteListener newListener){
+    public Sql setOnQueryCompleteListener(OnQueryCompleteListener newListener) {
         onQueryCompleteListener = newListener;
         return this;
     }
