@@ -24,6 +24,7 @@ import androidx.core.util.Pair;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.datepicker.MaterialDatePicker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.marcoscg.currencyedittext.CurrencyEditText;
@@ -45,6 +46,8 @@ import java.util.Objects;
 import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
+
+    BottomNavigationView bottomNavigationView;
 
     private ListContentAdapter adapter;
     private TextView mSubtitle;
@@ -72,6 +75,23 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.btn_add).setOnClickListener(v -> showAddDialog(null));
         findViewById(R.id.Main_Logout).setOnClickListener(v -> onBackPressed());
         initAddView();
+
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        bottomNavigationView.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()){
+                case R.id.reminders:
+                    break;
+                case R.id.graphic:
+                    break;
+                case R.id.plans:
+                    break;
+                case R.id.calculator:
+                    Calculator dialog = new Calculator(MainActivity.this);
+                    dialog.show();
+                    break;
+            }
+            return true;
+        });
     }
 
     @Override
