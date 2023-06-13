@@ -130,8 +130,6 @@
         android:elevation="4dp"
         app:layout_anchor="@id/Main_Header"
         app:layout_anchorGravity="bottom"
-
-
         app:options_list="@array/switchselector_date_filters"
         app:text_size="13sp" />
 
@@ -149,7 +147,7 @@
 
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottomNavigation"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginEnd="20dp"

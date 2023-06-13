@@ -1,12 +1,16 @@
 package com.project.poupay;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.text.Editable;
+import android.text.InputType;
+import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputConnection;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -16,72 +20,67 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Calculator extends BottomSheetDialog implements View.OnClickListener{
+public class Calculator extends BottomSheetDialog {
 
-    Button numZero, numOne, numTwo, numThree, numFour, numFive, numSix, numSeven, numEight, numNine,
-            point, sum, subtraction, division, multiplication, percentage, equal, clean, parentheses;
-    TextView txtExpression, txtResult;
-    ImageView backspace;
+    private TextView txtExpression;
+    private final TextView txtResult;
+    boolean isParenthesesOpen = false;
 
+    @SuppressLint("ClickableViewAccessibility")
     public Calculator(@NonNull Context context) {
         super(context, R.style.BottomAddDialogStyle);
-
-        View view = LayoutInflater.from(context).inflate(R.layout.calculator, null);
+        View view = LayoutInflater.from(context).inflate(R.layout.calculator, findViewById(R.id.Calculator_Main));
         setContentView(view);
 
-        initComponents();
-
-        numZero.setOnClickListener(this);
-        numOne.setOnClickListener(this);
-        numTwo.setOnClickListener(this);
-        numThree.setOnClickListener(this);
-        numFour.setOnClickListener(this);
-        numFive.setOnClickListener(this);
-        numSix.setOnClickListener(this);
-        numSeven.setOnClickListener(this);
-        numEight.setOnClickListener(this);
-        numNine.setOnClickListener(this);
-        point.setOnClickListener(this);
-        sum.setOnClickListener(this);
-        subtraction.setOnClickListener(this);
-        multiplication.setOnClickListener(this);
-        division.setOnClickListener(this);
-        percentage.setOnClickListener(this);
-        parentheses.setOnClickListener(this);
-
-        clean.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                txtExpression.setText("");
-                txtResult.setText("");
+        txtExpression = findViewById(R.id.txt_expression);
+        txtResult = view.findViewById(R.id.txt_result);
+        view.findViewById(R.id.num_zero).setOnClickListener(v -> addExpression("0"));
+        view.findViewById(R.id.num_one).setOnClickListener(v -> addExpression("1"));
+        view.findViewById(R.id.num_two).setOnClickListener(v -> addExpression("2"));
+        view.findViewById(R.id.num_three).setOnClickListener(v -> addExpression("3"));
+        view.findViewById(R.id.num_four).setOnClickListener(v -> addExpression("4"));
+        view.findViewById(R.id.num_five).setOnClickListener(v -> addExpression("5"));
+        view.findViewById(R.id.num_six).setOnClickListener(v -> addExpression("6"));
+        view.findViewById(R.id.num_seven).setOnClickListener(v -> addExpression("7"));
+        view.findViewById(R.id.num_eight).setOnClickListener(v -> addExpression("8"));
+        view.findViewById(R.id.num_nine).setOnClickListener(v -> addExpression("9"));
+        view.findViewById(R.id.point).setOnClickListener(v -> addExpression("."));
+        view.findViewById(R.id.sum).setOnClickListener(v -> addExpression("+"));
+        view.findViewById(R.id.subtraction).setOnClickListener(v -> addExpression("-"));
+        view.findViewById(R.id.multiplication).setOnClickListener(v -> addExpression("×"));
+        view.findViewById(R.id.division).setOnClickListener(v -> addExpression("÷"));
+        view.findViewById(R.id.percentage).setOnClickListener(v -> addExpression("%"));
+        view.findViewById(R.id.parentheses).setOnClickListener(v -> {
+            if (isParenthesesOpen) {
+                addExpression(")");
+                isParenthesesOpen = false;
+            } else {
+                addExpression("(");
+                isParenthesesOpen = true;
             }
         });
 
-        backspace.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                TextView expression = findViewById(R.id.txt_expression);
-                String string = expression.getText().toString();
-
-                if (!string.isEmpty()) {
-
-                    byte var0 = 0;
-                    int var1 = string.length() - 1;
-                    String txtExpression = string.substring(var0, var1);
-                    expression.setText(txtExpression);
-                }
-                txtResult.setText("");
-            }
+        view.findViewById(R.id.clean).setOnClickListener(v -> {
+            txtExpression.setText("");
+            txtResult.setText("");
+            txtExpression.setSelected(false);
+            txtExpression.onCreateInputConnection(new EditorInfo()).setSelection(txtExpression.getText().length(), txtExpression.getText().length());
         });
 
-        equal.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                txtExpression.setText(txtResult.getText());
-            }
+        view.findViewById(R.id.backspace).setOnClickListener(v -> {
+            InputConnection ic = txtExpression.onCreateInputConnection(new EditorInfo());
+            if (TextUtils.isEmpty(ic.getSelectedText(0))) ic.deleteSurroundingText(1, 0);
+            else ic.commitText("", 1);
         });
 
+        view.findViewById(R.id.equal).setOnClickListener(v -> {
+            txtExpression.setText(txtResult.getText());
+            txtExpression.onCreateInputConnection(new EditorInfo()).setSelection(txtExpression.getText().length(), txtExpression.getText().length());
+        });
+
+        txtExpression.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        txtExpression.setTextIsSelectable(true);
+        txtExpression.setInputType(txtExpression.getInputType() | InputType.TYPE_TEXT_FLAG_NO_SUGGESTIONS);
         txtExpression.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -96,40 +95,19 @@ public class Calculator extends BottomSheetDialog implements View.OnClickListene
                 calculateResult();
             }
         });
-}
-    private void initComponents() {
-        numZero = findViewById(R.id.num_zero);
-        numOne = findViewById(R.id.num_one);
-        numTwo = findViewById(R.id.num_two);
-        numThree = findViewById(R.id.num_three);
-        numFour = findViewById(R.id.num_four);
-        numFive = findViewById(R.id.num_five);
-        numSix = findViewById(R.id.num_six);
-        numSeven = findViewById(R.id.num_seven);
-        numEight = findViewById(R.id.num_eight);
-        numNine = findViewById(R.id.num_nine);
-        point = findViewById(R.id.point);
-        sum = findViewById(R.id.sum);
-        subtraction = findViewById(R.id.subtraction);
-        multiplication = findViewById(R.id.multiplication);
-        division = findViewById(R.id.division);
-        equal = findViewById(R.id.equal);
-        clean = findViewById(R.id.clean);
-        txtExpression = findViewById(R.id.txt_expression);
-        txtResult = findViewById(R.id.txt_result);
-        backspace = findViewById(R.id.backspace);
-        percentage = findViewById(R.id.percentage);
-        parentheses = findViewById(R.id.parentheses);
+        txtExpression.setOnTouchListener((v, event) -> {
+            EditText edittext = (EditText) v;
+            int inType = edittext.getInputType();
+            edittext.setInputType(InputType.TYPE_NULL);
+            edittext.onTouchEvent(event);
+            edittext.setInputType(inType);
+            return true;
+        });
     }
 
-    public void addExpression(String string, boolean clearData) {
-        String expression = txtExpression.getText().toString();
 
-        if (clearData) {
-            txtExpression.setText(expression + string);
-        } else {
-            txtExpression.append(string);
-        }
+    public void addExpression(String string) {
+        txtExpression.onCreateInputConnection(new EditorInfo()).commitText(string, 1);
         calculateResult();
     }
 
@@ -156,85 +134,4 @@ public class Calculator extends BottomSheetDialog implements View.OnClickListene
     }
 
 
-    boolean isParenthesesOpen = false;
-    @Override
-    public void onClick(View view) {
-
-        switch (view.getId()) {
-            case R.id.num_zero:
-                addExpression("0", true);
-                break;
-
-            case R.id.num_one:
-                addExpression("1", true);
-                break;
-
-            case R.id.num_two:
-                addExpression("2", true);
-                break;
-
-            case R.id.num_three:
-                addExpression("3", true);
-                break;
-
-            case R.id.num_four:
-                addExpression("4", true);
-                break;
-
-            case R.id.num_five:
-                addExpression("5", true);
-                break;
-
-            case R.id.num_six:
-                addExpression("6", true);
-                break;
-
-            case R.id.num_seven:
-                addExpression("7", true);
-                break;
-
-            case R.id.num_eight:
-                addExpression("8", true);
-                break;
-
-            case R.id.num_nine:
-                addExpression("9", true);
-                break;
-
-            case R.id.point:
-                addExpression(".", true);
-                break;
-
-            case R.id.sum:
-                addExpression("+", false);
-                break;
-
-            case R.id.subtraction:
-                addExpression("-", false);
-                break;
-
-            case R.id.multiplication:
-                addExpression("×", false);
-                break;
-
-            case R.id.division:
-                addExpression("÷", false);
-                break;
-
-            case R.id.percentage:
-                addExpression("%", false);
-                break;
-
-            case R.id.parentheses:
-
-                if (isParenthesesOpen){
-                    addExpression(")", false);
-                    isParenthesesOpen = false;
-                }else{
-                    addExpression("(", false);
-                    isParenthesesOpen = true;
-                }
-                break;
-        }
-    }
 }

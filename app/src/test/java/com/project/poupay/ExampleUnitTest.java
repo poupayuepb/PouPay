@@ -4,6 +4,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import com.project.poupay.tools.FieldValidator;
+
 import org.junit.Test;
 
 public class ExampleUnitTest {
@@ -38,6 +39,11 @@ public class ExampleUnitTest {
         assertFalse(FieldValidator.validate("Senha@@@", FieldValidator.TYPE_PASSWORD));
         assertFalse(FieldValidator.validate("senha@@@", FieldValidator.TYPE_PASSWORD));
 
+
+    }
+
+    @Test
+    public void add_validation(){
 
     }
 }

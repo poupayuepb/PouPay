@@ -7,7 +7,7 @@
     </style>
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
-    <!--<item name="textAllCaps">false</item>-->
+        <!--<item name="textAllCaps">false</item>-->
         <item name="fontFamily">@font/quicksand_bold</item>
         <item name="android:background">@drawable/coustom_button</item>
         <item name="android:fontFamily">@font/quicksand_regular</item>
@@ -43,7 +43,6 @@
     </style>
 
     <style name="Numbers_Button" parent="Calculator_container_Button">
-        <item name="android:backgroundTint">#c9c9c9</item>
         <item name="android:textColor">@color/background</item>
     </style>
 

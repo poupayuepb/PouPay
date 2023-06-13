@@ -47,11 +47,10 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    BottomNavigationView bottomNavigationView;
-
     private ListContentAdapter adapter;
     private TextView mSubtitle;
     private SwitchSelector mFilterSelector;
+    private Calculator mCalculatorDialog;
 
     private boolean isAddLayoutVisible = false;
     private int indexFilter = 0;
@@ -76,20 +75,11 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.Main_Logout).setOnClickListener(v -> onBackPressed());
         initAddView();
 
-        bottomNavigationView = findViewById(R.id.bottomNavigation);
+        mCalculatorDialog = new Calculator(MainActivity.this);
+        BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
-            switch (item.getItemId()){
-                case R.id.reminders:
-                    break;
-                case R.id.graphic:
-                    break;
-                case R.id.plans:
-                    break;
-                case R.id.calculator:
-                    Calculator dialog = new Calculator(MainActivity.this);
-                    dialog.show();
-                    break;
-            }
+            if(item.getItemId() == R.id.calculator) mCalculatorDialog.show();
+            // TODO: Implementar os demais botoes
             return true;
         });
     }
