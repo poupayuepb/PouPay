@@ -79,6 +79,10 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.calculator) mCalculatorDialog.show();
+            if(item.getItemId() == R.id.reports) {
+                Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            }
             // TODO: Implementar os demais botoes
             return true;
         });

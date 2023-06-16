@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ReportsActivity">
+
+    <RelativeLayout
+        android:id="@+id/Main_Header"
+        android:layout_width="match_parent"
+        android:layout_height="194dp"
+        android:background="@drawable/bg_gradient_header"
+        android:elevation="4dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginEnd="6dp"
+            android:layout_marginBottom="6dp"
+            android:text="@string/txt_date"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+
+        <ImageView
+            android:id="@+id/back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="6dp"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="6dp"
+            android:contentDescription="@string/logout"
+            android:src="@drawable/ic_back" />
+
+        <TextView
+            android:id="@+id/txt_reports"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/back"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="6dp"
+            android:gravity="center"
+            android:text="Relatórios"
+            android:textColor="@color/white"
+            android:textSize="28sp"
+            android:textStyle="bold" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_download"
+            style="@style/ButtonStyle"
+            android:layout_width="230dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txt_reports"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="16dp"
+            android:drawableStart="@drawable/ic_baseline_download_24"
+            android:gravity="center"
+            android:paddingStart="10dp"
+            android:paddingEnd="34dp"
+            android:text="@string/btn_download"
+            android:textColor="@color/background"
+            android:textSize="20sp" />
+
+    </RelativeLayout>
+
+    <com.project.poupay.view.SwitchSelector
+        android:id="@+id/Add_InputType"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:layout_marginHorizontal="24dp"
+        android:elevation="4dp"
+        app:layout_anchor="@id/Main_Header"
+        app:layout_anchorGravity="bottom"
+        app:options_list="@array/switchselector_inputType"
+        app:text_size="14sp" />
+
+    <RelativeLayout
+        android:id="@+id/rl_reports"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E3E3E3"
+        android:paddingTop="220dp">
+
+        <RelativeLayout
+            android:id="@+id/rl_chart"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/chart"
+                android:layout_width="200dp"
+                android:layout_height="200dp"
+                android:layout_centerHorizontal="true"
+                android:src="@android:mipmap/sym_def_app_icon" />
+
+            <ImageView
+                android:id="@+id/arrowLeft"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/chart"
+                android:src="@drawable/ic_baseline_keyboard_arrow_left_24" />
+
+            <ImageView
+                android:id="@+id/arrowRight"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_toEndOf="@+id/chart"
+                android:src="@drawable/ic_baseline_keyboard_arrow_right_24" />
+
+        </RelativeLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card_category"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rl_chart"
+            android:layout_marginStart="10dp"
+            android:layout_marginTop="30dp"
+            android:layout_marginEnd="10dp"
+            android:layout_marginBottom="10dp"
+            android:background="@color/white"
+            app:cardCornerRadius="12dp">
+
+            <com.project.poupay.view.SwitchSelector
+                android:id="@+id/Add_categoryType"
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_below="@id/chart"
+                android:layout_marginHorizontal="24dp"
+                android:layout_marginTop="10dp"
+                android:elevation="4dp"
+                app:options_list="@array/switchselector_categoryType"
+                app:text_size="14sp" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="50dp">
+
+            </androidx.recyclerview.widget.RecyclerView>
+
+        </androidx.cardview.widget.CardView>
+    </RelativeLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

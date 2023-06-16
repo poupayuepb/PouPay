@@ -52,4 +52,5 @@
     <string name="cancel">Cancelar</string>
     <string name="close_app">Fechar o Aplicativo</string>
     <string name="logout_account">Sair da Conta</string>
+    <string name="btn_download">Baixar</string>
 </resources>

@@ -7,7 +7,7 @@
         android:icon="@drawable/ic_baseline_notification_24"/>
 
     <item
-        android:id="@+id/graphic"
+        android:id="@+id/reports"
         android:title="@string/logs"
         android:icon="@drawable/ic_baseline_graphic_chart_24"/>
 
