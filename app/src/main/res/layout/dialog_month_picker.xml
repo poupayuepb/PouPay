@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/Month_Picker_Main"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/background"
+    android:orientation="vertical"
+    tools:ignore="Overdraw">
+
+    <TextView
+        android:id="@+id/Month_Picker_Title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#3F000000"
+        android:padding="6dp"
+        android:textAlignment="center"
+        android:textColor="@color/white"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:drawableTopCompat="@drawable/ic_calendar" />
+
+    <LinearLayout
+        android:layout_marginTop="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="56dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:id="@+id/Month_Picker_Year_Minus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
+            app:tint="@color/white"
+            android:importantForAccessibility="no" />
+
+        <TextView
+            android:id="@+id/Month_Picker_Year"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1.5"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textSize="26sp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/Month_Picker_Year_Plus"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
+            app:tint="@color/white"
+            android:importantForAccessibility="no" />
+
+
+    </LinearLayout>
+
+    <GridLayout
+        android:id="@+id/Month_Picker_Month_Layout"
+        android:layout_width="wrap_content"
+        android:layout_gravity="center"
+        android:layout_height="wrap_content"
+        android:columnCount="4"
+        android:paddingHorizontal="32dp"
+        android:rowCount="3"
+        tools:ignore="HardcodedText">
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Jan" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Fev" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Mar" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Abr" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Mai" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Jun" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Jul" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Ago" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Set" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Out" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Nov" />
+
+        <TextView
+            style="@style/Dialog_MonthPicker"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:text="Dez" />
+
+
+    </GridLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="12dp">
+
+        <Button
+            android:id="@+id/Month_Picker_Cancel"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="6dp"
+            android:layout_weight="1"
+            android:text="@string/cancel"
+            android:textColor="@color/background"
+            android:textSize="20sp"
+            app:backgroundTint="@null" />
+
+        <Button
+            android:id="@+id/Month_Picker_Confirm"
+            style="@style/ButtonStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="6dp"
+            android:layout_weight="1"
+            android:text="@string/btn_concluir"
+            android:textColor="@color/background"
+            android:textSize="20sp"
+            app:backgroundTint="@null" />
+
+    </LinearLayout>
+
+
+</LinearLayout>

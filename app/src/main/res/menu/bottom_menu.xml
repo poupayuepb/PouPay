@@ -2,7 +2,6 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/reminders"
         android:title="@string/reminds"
         android:icon="@drawable/ic_baseline_notification_24"/>
 
@@ -16,7 +15,6 @@
         android:enabled="false"/>
 
     <item
-        android:id="@+id/plans"
         android:title="@string/plains"
         android:icon="@drawable/ic_baseline_plans_local_atm_24"/>
 

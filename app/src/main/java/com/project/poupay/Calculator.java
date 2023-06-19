@@ -22,7 +22,7 @@ import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class Calculator extends BottomSheetDialog {
 
-    private TextView txtExpression;
+    private final TextView txtExpression;
     private final TextView txtResult;
     boolean isParenthesesOpen = false;
 
@@ -32,7 +32,7 @@ public class Calculator extends BottomSheetDialog {
         View view = LayoutInflater.from(context).inflate(R.layout.calculator, findViewById(R.id.Calculator_Main));
         setContentView(view);
 
-        txtExpression = findViewById(R.id.txt_expression);
+        txtExpression = view.findViewById(R.id.txt_expression);
         txtResult = view.findViewById(R.id.txt_result);
         view.findViewById(R.id.num_zero).setOnClickListener(v -> addExpression("0"));
         view.findViewById(R.id.num_one).setOnClickListener(v -> addExpression("1"));

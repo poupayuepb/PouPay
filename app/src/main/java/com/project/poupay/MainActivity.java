@@ -31,7 +31,7 @@ import com.marcoscg.currencyedittext.CurrencyEditText;
 import com.project.poupay.alerts.MessageAlert;
 import com.project.poupay.sql.Preferences;
 import com.project.poupay.sql.User;
-import com.project.poupay.view.ListContentAdapter;
+import com.project.poupay.view.ListSegmentAdapter;
 import com.project.poupay.view.SwitchSelector;
 import com.skydoves.powerspinner.DefaultSpinnerAdapter;
 import com.skydoves.powerspinner.PowerSpinnerView;
@@ -40,6 +40,7 @@ import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 import java.util.Objects;
@@ -47,7 +48,7 @@ import java.util.TimeZone;
 
 public class MainActivity extends AppCompatActivity {
 
-    private ListContentAdapter adapter;
+    private ListSegmentAdapter adapter;
     private TextView mSubtitle;
     private SwitchSelector mFilterSelector;
     private Calculator mCalculatorDialog;
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
 
         RecyclerView mList = findViewById(R.id.Main_List);
         mList.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        adapter = new ListContentAdapter();
+        adapter = new ListSegmentAdapter();
         mList.setAdapter(adapter);
 
         mFilterSelector = findViewById(R.id.Main_FilterSelector);
@@ -117,6 +118,11 @@ public class MainActivity extends AppCompatActivity {
             ((TextView) findViewById(R.id.txt_balance_value)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(total));
             ((TextView) findViewById(R.id.Main_Header_Out)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(despesa));
             ((TextView) findViewById(R.id.Main_Header_In)).setText(NumberFormat.getCurrencyInstance(Locale.getDefault()).format(receita));
+
+            Date date = Calendar.getInstance().getTime();
+            String dateString = new SimpleDateFormat("dd", Locale.getDefault()).format(date) + " de " + new SimpleDateFormat("MMMM", Locale.getDefault()).format(date);
+            ((TextView) findViewById(R.id.Main_Date)).setText(dateString);
+
             setLoadingMode(false);
         }, exception -> showErroMessage(R.string.sqlerror));
     }

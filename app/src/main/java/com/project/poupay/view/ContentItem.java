@@ -20,16 +20,19 @@ public class ContentItem extends ConstraintLayout {
     public static final int CONTENT_ITEM_TYPE_OTHER = 3;
 
     private final double mValue;
-    private final int mId;
-    private final String mDate;
+    private final int mId, mParcels;
+    private final String mDate, mTitle, mSubtitle;
 
-    public ContentItem(Context context, int id, String date, String title, String subtitle, int type, double value) {
+    public ContentItem(Context context, int id, String date, String title, String subtitle, int type, double value, int parcels) {
         super(context);
         inflate(context, R.layout.view_contentitem, this);
 
         mValue = value;
         mId = id;
         mDate = date;
+        mTitle = title;
+        mSubtitle = subtitle;
+        mParcels = parcels;
 
         ShapeableImageView mImage = findViewById(R.id.ContentItem_Image);
         TextView mTitle = findViewById(R.id.ContentItem_Title);
@@ -73,4 +76,15 @@ public class ContentItem extends ConstraintLayout {
         return mDate;
     }
 
+    public String getTitle() {
+        return mTitle;
+    }
+
+    public String getSubtitle() {
+        return mSubtitle;
+    }
+
+    public int getParcels() {
+        return mParcels;
+    }
 }

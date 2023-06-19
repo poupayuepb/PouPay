@@ -10,8 +10,8 @@ android {
         applicationId "com.project.poupay"
         minSdk 21
         targetSdk 33
-        versionCode 50
-        versionName "Versão 0.5 - Teste"
+        versionCode 60
+        versionName "Versão 0.6 - Teste"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -44,8 +44,18 @@ dependencies {
     // Biometric
     implementation "androidx.biometric:biometric:1.1.0"
 
-    //calculator
+    // Calculator
     implementation 'net.objecthunter:exp4j:0.4.8'
+
+    // MPAndroidChart
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
+
+    // StringUtils
+    implementation  'org.apache.commons:commons-lang3:3.0'
+
+    // JExcelApi
+    implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6'
+
 
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'

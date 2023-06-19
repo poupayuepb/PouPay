@@ -5,6 +5,9 @@ import android.content.Context;
 import androidx.annotation.Nullable;
 
 import com.project.poupay.view.ContentItem;
+import com.project.poupay.view.ContentReportItem;
+
+import org.apache.commons.lang3.StringUtils;
 
 import java.sql.Date;
 import java.sql.SQLException;
@@ -76,15 +79,15 @@ public class User {
                                 data = new SimpleDateFormat("dd", Locale.getDefault()).format(result.getDate("data")) + " de " + new SimpleDateFormat("MMMM", Locale.getDefault()).format(result.getDate("data"));
                                 String descricao = result.getString("descricao");
                                 int parcelas = result.getInt("parcelas");
-                                contents.add(new ContentItem(context, id, data, descricao, categoria, categoria_id, valor));
+                                contents.add(new ContentItem(context, id, data, descricao, categoria, categoria_id, valor, parcelas));
                                 break;
                             case FILTER_MONTH:
                                 data = new SimpleDateFormat("MMMM", Locale.getDefault()).format(Date.valueOf(result.getString("month"))) + " de " + new SimpleDateFormat("yyyy", Locale.getDefault()).format(Date.valueOf(result.getString("month")));
-                                contents.add(new ContentItem(context, -1, data, categoria, "", categoria_id, valor));
+                                contents.add(new ContentItem(context, -1, data, categoria, "", categoria_id, valor, 0));
                                 break;
                             case FILTER_YEAR:
                                 data = result.getString("year");
-                                contents.add(new ContentItem(context, -1, data, categoria, "", categoria_id, valor));
+                                contents.add(new ContentItem(context, -1, data, categoria, "", categoria_id, valor, 0));
                                 break;
                         }
                     }
@@ -129,7 +132,7 @@ public class User {
                                 + " de " + new SimpleDateFormat("yyyy", Locale.getDefault()).format(result.getDate("data"));
                         String descricao = result.getString("descricao");
                         int parcelas = result.getInt("parcelas");
-                        contents.add(new ContentItem(context, id, data, descricao, categoria, categoria_id, valor));
+                        contents.add(new ContentItem(context, id, data, descricao, categoria, categoria_id, valor, parcelas));
                     }
                     sucessListener.onSucess(contents);
                 } catch (SQLException ex) {
@@ -159,12 +162,43 @@ public class User {
         }).start();
     }
 
+    public static void getReportItems(Context context, int type, int category, int year, int month, OnSqlGetReportOperationSucessListener sucessListener, OnSqlOperationFailedListener failedListener) {
+        String query = category == 0 ? "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, LOWER(descricao) as desc\n" +
+                "FROM (SELECT valor, data, descricao FROM transacoes WHERE valor " + (type == 1 ? ">=" : "<") + "0 AND usuario_nome = '" + username + "') as t\n" +
+                "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '" + year + "-" + (month < 10 ? "0" : "") + month + "%'\n" +
+                "GROUP BY month, descricao;\n" : "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, nome as desc\n" +
+                "FROM (SELECT valor, data, nome FROM transacoes INNER JOIN categorias ON categoria_id = categorias.id WHERE valor" + (type == 1 ? ">=" : "<") + "0 AND usuario_nome = '" + username + "') as t\n" +
+                "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '" + year + "-" + (month < 10 ? "0" : "") + month + "%'\n" +
+                "GROUP BY month, nome;";
+
+        new Sql(context, query).setOnQueryCompleteListener((result, queryException) -> {
+            if (queryException != null) failedListener.onFailed(queryException);
+            else {
+                try {
+                    List<ContentReportItem> contents = new ArrayList<>();
+                    while (result.next()) {
+                        double valor = result.getDouble("price");
+                        String descricao = StringUtils.capitalize(result.getString("desc"));
+                        contents.add(new ContentReportItem(descricao, valor));
+                    }
+                    sucessListener.onSucess(contents);
+                } catch (SQLException ex) {
+                    failedListener.onFailed(ex);
+                }
+            }
+        }).start();
+    }
+
     public interface OnSqlAddOperationSucessListener {
         void onSucess();
     }
 
     public interface OnSqlGetOperationSucessListener {
         void onSucess(List<ContentItem> contents);
+    }
+
+    public interface OnSqlGetReportOperationSucessListener {
+        void onSucess(List<ContentReportItem> contents);
     }
 
     public interface OnSqlGetHeaderOperationSucessListener {
