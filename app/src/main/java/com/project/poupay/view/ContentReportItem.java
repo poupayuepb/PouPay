@@ -29,7 +29,7 @@ public class ContentReportItem {
 
     public int getImageID() {
         int id;
-        switch (title.toLowerCase()){
+        switch (title.toLowerCase()) {
             case "ar-condicionado":
             case "arcondicionado":
             case "casaco":
@@ -107,6 +107,20 @@ public class ContentReportItem {
                 id = R.drawable.ic_shop;
                 break;
 
+            case "pix":
+                id = R.drawable.ic_pix_18;
+                break;
+
+            case "dinheiro":
+                id = R.drawable.ic_money_18;
+                break;
+
+            case "cartão de crédito":
+                id = R.drawable.ic_card_18;
+                break;
+            case "outro":
+                id = R.drawable.ic_baseline_plans_local_atm_24;
+                break;
 
             default:
                 id = R.drawable.ic_payment_other_36;

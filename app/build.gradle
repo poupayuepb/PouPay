@@ -10,8 +10,8 @@ android {
         applicationId "com.project.poupay"
         minSdk 21
         targetSdk 33
-        versionCode 60
-        versionName "Versão 0.6 - Teste"
+        versionCode 50
+        versionName "Versão 0.5 - Teste"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
