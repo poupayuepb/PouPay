@@ -9,6 +9,6 @@ public class PlansActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tela_planos);
+        setContentView(R.layout.activity_plans);
     }
 }

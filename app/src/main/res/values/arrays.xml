@@ -23,4 +23,9 @@
         <item>POR DESCRIÇÃO</item>
         <item>POR TIPO</item>
     </string-array>
+
+    <string-array name="switchselector_plansType">
+        <item>ADICIONAR</item>
+        <item>RETIRAR</item>
+    </string-array>
 </resources>

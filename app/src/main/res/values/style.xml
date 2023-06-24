@@ -7,7 +7,6 @@
     </style>
 
     <style name="ButtonStyle" parent="Widget.AppCompat.Button">
-        <!--<item name="textAllCaps">false</item>-->
         <item name="fontFamily">@font/quicksand_bold</item>
         <item name="android:background">@drawable/coustom_button</item>
         <item name="android:fontFamily">@font/quicksand_regular</item>
@@ -17,6 +16,12 @@
         <!--<item name="textAllCaps">false</item>-->
         <item name="fontFamily">@font/quicksand_bold</item>
         <item name="android:background">@drawable/custom_button_stroke</item>
+        <item name="android:fontFamily">@font/quicksand_regular</item>
+    </style>
+
+    <style name="ButtonStyleRound" parent="Widget.AppCompat.Button">
+        <item name="fontFamily">@font/quicksand_bold</item>
+        <item name="android:background">@drawable/custom_button_round</item>
         <item name="android:fontFamily">@font/quicksand_regular</item>
     </style>
 
