@@ -20,14 +20,14 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import net.objecthunter.exp4j.Expression;
 import net.objecthunter.exp4j.ExpressionBuilder;
 
-public class Calculator extends BottomSheetDialog {
+public class MainActivity_Calculator extends BottomSheetDialog {
 
     private final TextView txtExpression;
     private final TextView txtResult;
     boolean isParenthesesOpen = false;
 
     @SuppressLint("ClickableViewAccessibility")
-    public Calculator(@NonNull Context context) {
+    public MainActivity_Calculator(@NonNull Context context) {
         super(context, R.style.BottomAddDialogStyle);
         View view = LayoutInflater.from(context).inflate(R.layout.calculator, findViewById(R.id.Calculator_Main));
         setContentView(view);

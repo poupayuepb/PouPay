@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/AddPlan_Back"
+        style="@style/ButtonStyleRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_ripple_button_purple"
+        android:layout_margin="12dp"
+        android:drawableStart="@drawable/ic_up"
+        android:paddingHorizontal="24dp"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/AddPlan_Back"
+        android:layout_marginBottom="63dp"
+        android:gravity="center_horizontal"
+        android:text="@string/new_plan_title"
+        android:textColor="@color/black"
+        android:textSize="18sp" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="24dp"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/AddPlan_Investiment"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/custom_shape_stroke"
+                android:contentDescription="@string/plan_invest"
+                android:padding="6dp"
+                android:src="@drawable/investmentplan" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/plan_invest"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/AddPlan_Travel"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/custom_shape_stroke"
+                android:contentDescription="@string/plan_travel"
+                android:padding="6dp"
+                android:src="@drawable/travelplan" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/plan_travel"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/AddPlan_Reserve"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/custom_shape_stroke"
+                android:contentDescription="@string/plan_emergency"
+                android:padding="6dp"
+                android:src="@drawable/reserveplan" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="12dp"
+                android:text="@string/plan_emergency"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/AddPlan_Debt"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:background="@drawable/custom_shape_stroke"
+                android:contentDescription="@string/plan_debt"
+                android:padding="6dp"
+                android:src="@drawable/debtplan" />
+
+            <TextView
+                android:layout_width="150dp"
+                android:layout_height="wrap_content"
+                android:text="@string/plan_debt"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:textStyle="bold" />
+        </LinearLayout>
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/AddPlan_OtherInput"
+            android:layout_width="0dp"
+            android:layout_height="42dp"
+            android:layout_marginStart="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/coustom_editext"
+            android:backgroundTint="#EDEDED"
+            android:hint="@string/Plan_inputGoal"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:paddingHorizontal="16dp"
+            android:textColor="@color/background"
+            android:textColorHint="#B0B0B0"
+            android:textSize="14sp"
+            android:textStyle="bold"
+            android:translationZ="4dp" />
+
+        <ImageView
+            android:id="@+id/AddPlan_Confirm"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_margin="12dp"
+            android:background="@drawable/bg_ripple_button_purple"
+            android:contentDescription="@string/btn_confirm"
+            android:gravity="center"
+            android:padding="8dp"
+            android:src="@drawable/ic_baseline_done_24"
+            android:translationZ="4dp" />
+
+    </LinearLayout>
+</RelativeLayout>

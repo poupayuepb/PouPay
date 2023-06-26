@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/AddPlanForm_Back"
+        style="@style/ButtonStyleRound"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_ripple_button_purple"
+        android:drawableStart="@drawable/ic_up"
+        android:paddingHorizontal="24dp"
+        android:text="@string/back"
+        android:textColor="@color/white"
+        android:textSize="18sp" />
+
+    <ImageView
+        android:id="@+id/AddPlanForm_Image"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/AddPlanForm_Form"
+        android:layout_below="@+id/AddPlanForm_Back"
+        android:importantForAccessibility="no"
+        android:src="@drawable/bg_plans_pig" />
+
+    <TextView
+        android:id="@+id/AddPlanForm_Goal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/AddPlanForm_Image"
+        android:lines="1"
+        android:maxLength="32"
+        android:textColor="@color/background"
+        android:gravity="center_horizontal"
+        android:textSize="28sp" />
+
+    <LinearLayout
+        android:id="@+id/AddPlanForm_Form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:gravity="center_horizontal"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16sp"
+            android:text="@string/txt_value"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <com.marcoscg.currencyedittext.CurrencyEditText
+            android:id="@+id/AddPlanForm_Value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/bg_text"
+            android:importantForAutofill="no"
+            android:inputType="number"
+            android:lines="1"
+            android:textAlignment="textStart"
+            android:textColor="@color/background"
+            android:textColorHint="#B7B7B7"
+            android:textSize="30sp" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/financial_institution"
+            android:textColor="@color/background"
+            android:textSize="16sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/AddPlanForm_FinancialInstitution"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/bg_text"
+            android:gravity="center"
+            android:hint="@string/financial_instituition_hint"
+            android:importantForAutofill="no"
+            android:inputType="text"
+            android:lines="1"
+            android:textStyle="bold"
+            android:maxLength="50"
+            android:padding="4dp"
+            android:textColor="@color/background"
+            android:textColorHint="#B7B7B7"
+            android:textSize="16sp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/AddPlanForm_EstimatedDate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="@string/estimated_date"
+                android:textColor="@color/background"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/AddPlanForm_EstimatedDateText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/AddPlanForm_EstimatedDate"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_text"
+                android:gravity="center"
+                android:padding="4dp"
+                android:text="@string/NewPlan_estimatedDate"
+                android:textColor="@color/background"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:id="@+id/AddPlanForm_EstimatedDatePicker"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginTop="12dp"
+                android:layout_marginEnd="12dp"
+                android:contentDescription="@string/select_date"
+                android:src="@drawable/ic_calendar"
+                app:fabSize="mini"
+                tools:ignore="RelativeOverlap" />
+
+        </RelativeLayout>
+
+        <Button
+            android:id="@+id/NewPlan_Confirm"
+            style="@style/ButtonStyleStroke"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="12dp"
+            android:layout_weight="1"
+            android:background="@drawable/bg_ripple_button_purple"
+            android:padding="0dp"
+            android:text="@string/btn_confirm"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -15,6 +15,7 @@
         android:enabled="false"/>
 
     <item
+        android:id="@+id/plans"
         android:title="@string/plains"
         android:icon="@drawable/ic_baseline_plans_local_atm_24"/>
 
