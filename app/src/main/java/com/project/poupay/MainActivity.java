@@ -51,7 +51,7 @@ public class MainActivity extends AppCompatActivity {
     private ListSegmentAdapter adapter;
     private TextView mSubtitle;
     private SwitchSelector mFilterSelector;
-    private Calculator mCalculatorDialog;
+    private MainActivity_Calculator mCalculatorDialog;
 
     private boolean isAddLayoutVisible = false;
     private int indexFilter = 0;
@@ -76,12 +76,15 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.Main_Logout).setOnClickListener(v -> onBackPressed());
         initAddView();
 
-        mCalculatorDialog = new Calculator(MainActivity.this);
+        mCalculatorDialog = new MainActivity_Calculator(MainActivity.this);
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnItemSelectedListener(item -> {
             if(item.getItemId() == R.id.calculator) mCalculatorDialog.show();
             if(item.getItemId() == R.id.reports) {
                 Intent intent = new Intent(MainActivity.this, ReportsActivity.class);
+                startActivity(intent);
+            } if(item.getItemId() == R.id.plans) {
+                Intent intent = new Intent(MainActivity.this, PlansActivity.class);
                 startActivity(intent);
             }
             // TODO: Implementar os demais botoes

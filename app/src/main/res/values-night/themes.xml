@@ -7,8 +7,10 @@
         <item name="colorSecondary">@color/background</item>
         <item name="colorSecondaryVariant">@color/background2</item>
         <item name="colorOnSecondary">@color/white</item>
+        <item name="android:navigationBarColor">@color/background</item>
         <item name="android:statusBarColor">@color/background2</item>
         <item name="android:textViewStyle">@style/TextViewStyle</item>
         <item name="android:forceDarkAllowed" tools:targetApi="q">false</item>
+
     </style>
 </resources>

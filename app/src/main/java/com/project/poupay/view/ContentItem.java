@@ -18,6 +18,7 @@ public class ContentItem extends ConstraintLayout {
     public static final int CONTENT_ITEM_TYPE_CARD = 1;
     public static final int CONTENT_ITEM_TYPE_PIX = 2;
     public static final int CONTENT_ITEM_TYPE_OTHER = 3;
+    public static final int CONTENT_ITEM_TYPE_NONE = -1;
 
     private final double mValue;
     private final int mId, mParcels;
@@ -60,9 +61,14 @@ public class ContentItem extends ConstraintLayout {
                 mImage.setImageResource(R.drawable.ic_other_18);
                 mImage.setBackgroundColor(getResources().getColor(R.color.orange));
                 break;
+            default:
+                mImage.setImageResource(R.drawable.ic_baseline_savings_24);
+                mImage.setBackgroundColor(getResources().getColor(R.color.background));
         }
+
         mValue.setTextColor(getResources().getColor(value < 0 ? R.color.red : R.color.green));
     }
+
 
     public double getValue() {
         return mValue;

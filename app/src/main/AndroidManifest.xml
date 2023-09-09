@@ -25,6 +25,12 @@
             android:name=".PlansActivity"
             android:exported="false" />
         <activity
+            android:name=".plans.PlansActivity_AddPlan"
+            android:exported="false" />
+        <activity
+            android:name=".plans.PlansActivity_AddPlan_Form"
+            android:exported="false" />
+        <activity
             android:name=".SigninActivity"
             android:exported="false">
             <meta-data

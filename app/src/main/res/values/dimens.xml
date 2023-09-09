@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="bottom_add_layout_height">390dp</dimen>
+    <dimen name="_200dp">200dp</dimen>
 </resources>

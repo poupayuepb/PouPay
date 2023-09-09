@@ -56,11 +56,24 @@
     <string name="select_date">Selecionar a data</string>
     <string name="export_xls_error">Erro ao baixar os seus dados. Tente novamente mais tarde.</string>
     <string name="export_xls_sucess">Planilha salva com sucesso.</string>
-    <string name="planning">Planemamentos</string>
+    <string name="planning">Planejamentos</string>
     <string name="Plans_addedValue">R$ 150,00</string>
     <string name="Plans_totalValue">/R$ 2000,00</string>
     <string name="btn_cancel">Cancelar</string>
-    <string name="NewPlan_estimatedDate">23/07/2024</string>
+    <string name="NewPlan_estimatedDate">--/--/----</string>
     <string name="hint_NewPlan_goal">Investimento</string>
-    <string name="Plan_inputGoal">Outro...</string>
+    <string name="Plan_inputGoal">Outro…</string>
+    <string name="my_plans">Meus Planos</string>
+    <string name="new_plan">Novo plano</string>
+    <string name="plan_invest">Investimento</string>
+    <string name="plan_travel">Viagem</string>
+    <string name="plan_emergency">Reserva</string>
+    <string name="plan_debt">Dívida</string>
+    <string name="new_plan_title">Qual seu objetivo financeiro?</string>
+    <string name="back">Voltar</string>
+    <string name="goal">Objetivo</string>
+    <string name="financial_institution">Instituição Financeira</string>
+    <string name="financial_instituition_hint">Banco, reserva pessoal…</string>
+    <string name="estimated_date">Data estimada</string>
+    <string name="description">Descrição</string>
 </resources>

@@ -23,7 +23,7 @@
         android:layout_width="match_parent"
         android:layout_height="194dp"
         android:background="@drawable/bg_gradient_header"
-        android:elevation="4dp">
+        android:elevation="2dp">
 
         <TextView
             android:id="@+id/Plans_Date"
@@ -103,225 +103,40 @@
                 android:text="@string/value_placeholder"
                 android:textColor="@color/black"
                 android:textSize="16sp"
-                app:drawableStartCompat="@drawable/ic_baseline_arrow_circle_up_24" />
+                app:drawableStartCompat="@drawable/ic_baseline_arrow_circle_up_24"
+                tools:ignore="RelativeOverlap" />
         </RelativeLayout>
 
     </RelativeLayout>
 
-    <ImageView
-        android:id="@+id/Plans_Ripple"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_gravity="center_horizontal|bottom"
-        android:clickable="true"
-        android:elevation="4dp"
-        android:focusable="true"
-        android:importantForAccessibility="no"
-        android:src="@drawable/bg_middle_button"
-        app:tint="#56000000" />
-
-    <LinearLayout
-        android:id="@+id/Plans_AddLayout"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/bottom_add_layout_height"
-        android:layout_gravity="bottom"
-        android:layout_marginStart="4dp"
-        android:layout_marginEnd="4dp"
-        android:background="@drawable/dialog_rounded_bg"
-        android:elevation="4dp"
-        android:gravity="center_horizontal"
-        android:orientation="vertical">
-        <!--android:translationY="@dimen/bottom_add_layout_height">-->
-
-        <!--DIALOG NOVO PLANO-->
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16sp"
-            android:text="@string/txt_value"
-            android:textColor="@color/background"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <com.marcoscg.currencyedittext.CurrencyEditText
-            android:id="@+id/NewPlan_Value"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_text"
-            android:importantForAutofill="no"
-            android:inputType="number"
-            android:lines="1"
-            android:textAlignment="textStart"
-            android:textColor="@color/background"
-            android:textColorHint="#B7B7B7"
-            android:textSize="30sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Objetivo"
-            android:textColor="@color/background"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/NewPlan_goal"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_text"
-            android:gravity="center"
-            android:hint="@string/hint_NewPlan_goal"
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="4dp"
-            android:textColor="@color/background"
-            android:textColorHint="#B7B7B7"
-            android:textSize="16sp" />
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:text="Instituição Financeira"
-            android:textColor="@color/background"
-            android:textSize="16sp"
-            android:textStyle="bold" />
-
-        <EditText
-            android:id="@+id/NewPlan_financialInstitution"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/bg_text"
-            android:gravity="center"
-            android:hint="Banco, reserva pessoal..."
-            android:importantForAutofill="no"
-            android:inputType="text"
-            android:lines="1"
-            android:padding="4dp"
-            android:textColor="@color/background"
-            android:textColorHint="#B7B7B7"
-            android:textSize="16sp" />
-
-        <RelativeLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-
-            <TextView
-                android:id="@+id/Title_estimatedDate"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="Data estimada"
-                android:textColor="@color/background"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <TextView
-                android:id="@+id/NewPlan_estimatedDate"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/Title_estimatedDate"
-                android:layout_centerHorizontal="true"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/bg_text"
-                android:gravity="center"
-                android:padding="4dp"
-                android:text="@string/NewPlan_estimatedDate"
-                android:textColor="@color/gray_light"
-                android:textSize="16sp"
-                android:textStyle="bold" />
-
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/NewPlan_DatePicker"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_alignParentEnd="true"
-                android:layout_centerVertical="true"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:contentDescription="@string/select_date"
-                android:src="@drawable/ic_calendar"
-                app:fabSize="mini"
-                tools:ignore="RelativeOverlap" />
-
-        </RelativeLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/NewPlan_cancel"
-                style="@style/ButtonStyleStroke"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="@string/btn_cancel"
-                android:textColor="@color/background"
-                android:textSize="16sp"
-                app:backgroundTint="@null" />
-
-            <Button
-                android:id="@+id/NewPlan_Confirm"
-                style="@style/ButtonStyleStroke"
-                android:layout_width="0dp"
-                android:layout_height="40dp"
-                android:layout_gravity="center"
-                android:layout_marginStart="8dp"
-                android:layout_weight="1"
-                android:padding="0dp"
-                android:text="@string/btn_confirm"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-
-        </LinearLayout>
-    </LinearLayout>
-
     <TextView
+        android:id="@+id/Plans_Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_gravity="top|center"
-        android:layout_marginTop="10dp"
-        android:paddingTop="194dp"
-        android:text="Meus planos"
+        android:layout_marginTop="226dp"
+        android:text="@string/my_plans"
         android:textColor="#333333"
+        android:clickable="false"
+        android:focusable="false"
         android:textSize="24sp"
         android:textStyle="bold" />
 
-    <ProgressBar
-        android:id="@+id/Main_ProgressBarCenter"
-        style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
-        android:layout_width="60dp"
-        android:layout_height="60dp"
-        android:layout_gravity="center"
-        android:elevation="10dp"
-        android:indeterminate="true"
-        android:indeterminateTint="@color/background"
-        android:paddingTop="220dp"
-        android:paddingBottom="84dp"
-        android:visibility="visible" />
-
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/btn_AddNewPlan"
+        android:id="@+id/Plans_AddPlan"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         style="@style/ButtonStyleRound"
-        android:text="Novo plano"
+        app:layout_anchor="@id/Plans_Header"
+        app:layout_anchorGravity="bottom|center_horizontal"
+        android:text="@string/new_plan"
         android:drawableStart="@drawable/ic_baseline_add_24"
-        android:paddingStart="14dp"
-        android:paddingEnd="18dp"
+        android:paddingHorizontal="24dp"
         android:textSize="18sp"
         android:textColor="@color/white"
         android:layout_gravity="bottom|center"
-        android:layout_marginBottom="12dp"/>
+        android:background="@drawable/bg_ripple_button_purple"
+        android:translationY="-24dp"/>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
