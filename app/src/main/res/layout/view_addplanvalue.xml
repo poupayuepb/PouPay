@@ -185,4 +185,15 @@
         app:layout_anchor="@id/Plans_AddLayout"
         app:layout_anchorGravity="end" />
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Plan_DeletePlan"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="86dp"
+        android:contentDescription="@string/add"
+        android:src="@drawable/ic_trash"
+        app:fabSize="mini"
+        app:layout_anchor="@id/Plans_AddLayout"
+        app:layout_anchorGravity="end" />
+
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

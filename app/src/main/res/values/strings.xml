@@ -26,12 +26,6 @@
     <string name="signup_finished">Cadastro Concluído</string>
     <string name="signup_sucess_text">Seu cadastro no PouPay foi realizado com sucesso. Clique no botão abaixo para voltar a tela de login para entrar com suas credenciais.</string>
     <string name="connection_error">Houve um problema com a comunicação com o servidor, cheque sua internet e tente novamente.</string>
-    <string name="txt_tittle_plane">Planejamentos</string>
-    <string name="txt_sub_plane">Qual é seu objetivo financeiro hoje?</string>
-    <string name="txt_plane1">Reserva de emergência</string>
-    <string name="txt_plane2">Viagens</string>
-    <string name="txt_plane3">Investimentos</string>
-    <string name="txt_plane4">Aquisição de um bem</string>
     <string name="logout">Sair do PouPay</string>
     <string name="add">Adicionar Informação</string>
     <string name="main_title">Despesas e Receitas</string>
@@ -57,11 +51,7 @@
     <string name="export_xls_error">Erro ao baixar os seus dados. Tente novamente mais tarde.</string>
     <string name="export_xls_sucess">Planilha salva com sucesso.</string>
     <string name="planning">Planejamentos</string>
-    <string name="Plans_addedValue">R$ 150,00</string>
-    <string name="Plans_totalValue">/R$ 2000,00</string>
-    <string name="btn_cancel">Cancelar</string>
     <string name="NewPlan_estimatedDate">--/--/----</string>
-    <string name="hint_NewPlan_goal">Investimento</string>
     <string name="Plan_inputGoal">Outro…</string>
     <string name="my_plans">Meus Planos</string>
     <string name="new_plan">Novo plano</string>
@@ -71,9 +61,14 @@
     <string name="plan_debt">Dívida</string>
     <string name="new_plan_title">Qual seu objetivo financeiro?</string>
     <string name="back">Voltar</string>
-    <string name="goal">Objetivo</string>
-    <string name="financial_institution">Instituição Financeira</string>
     <string name="financial_instituition_hint">Banco, reserva pessoal…</string>
     <string name="estimated_date">Data estimada</string>
     <string name="description">Descrição</string>
+    <string name="null_value">R$ -</string>
+    <string name="delete">Deletar</string>
+    <string name="deleteerro">Houve um problema ao deletar a entrada, verifique sua conexão com a internet e tente novamente.</string>
+    <string name="delete_content">Deletar Entidade</string>
+    <string name="delete_ask">Você tem certeza que deseja deletar esta entidade?</string>
+    <string name="no_plans">Não há planos para exibir.</string>
+    <string name="no_entries">Não há registros para exibir.</string>
 </resources>

@@ -72,7 +72,7 @@
 
     </RelativeLayout>
 
-    <com.project.poupay.view.SwitchSelector
+    <com.projeto.poupay.view.SwitchSelector
         android:id="@+id/Reports_Type"
         android:layout_width="match_parent"
         android:layout_height="30dp"
@@ -155,7 +155,7 @@
         </androidx.cardview.widget.CardView>
     </RelativeLayout>
 
-    <com.project.poupay.view.SwitchSelector
+    <com.projeto.poupay.view.SwitchSelector
         android:id="@+id/Reports_Category"
         android:layout_width="match_parent"
         android:layout_height="30dp"

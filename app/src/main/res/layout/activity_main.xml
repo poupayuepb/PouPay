@@ -12,7 +12,7 @@
         android:id="@+id/Main_List"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#E3E3E3"
+        android:background="#F6F6F6"
         android:clipToPadding="false"
         android:overScrollMode="never"
         android:paddingHorizontal="12dp"
@@ -125,7 +125,7 @@
             android:textSize="14sp" />
     </RelativeLayout>
 
-    <com.project.poupay.view.SwitchSelector
+    <com.projeto.poupay.view.SwitchSelector
         android:id="@+id/Main_FilterSelector"
         android:layout_width="match_parent"
         android:layout_height="32dp"
@@ -198,7 +198,7 @@
         android:orientation="vertical"
         android:translationY="@dimen/bottom_add_layout_height">
 
-        <com.project.poupay.view.SwitchSelector
+        <com.projeto.poupay.view.SwitchSelector
             android:id="@+id/Add_InputType"
             android:layout_width="match_parent"
             android:layout_height="40dp"
@@ -255,7 +255,7 @@
             android:textColorHint="#B7B7B7"
             android:textSize="18sp" />
 
-        <com.project.poupay.view.SwitchSelector
+        <com.projeto.poupay.view.SwitchSelector
             android:id="@+id/Add_Type"
             android:layout_width="match_parent"
             android:layout_height="70dp"
@@ -323,5 +323,18 @@
         android:indeterminate="true"
         android:indeterminateTint="@color/background"
         android:visibility="visible" />
+
+
+    <TextView
+        android:id="@+id/Main_Empty"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/no_entries"
+        android:layout_gravity="center"
+        android:paddingTop="80dp"
+        android:textStyle="bold"
+        android:alpha="0.15"
+        app:drawableTopCompat="@drawable/ic_box" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

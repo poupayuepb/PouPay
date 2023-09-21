@@ -1,17 +1,18 @@
 plugins {
     id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
 }
 
 android {
-    namespace 'com.project.poupay'
-    compileSdk 33
+    namespace 'com.projeto.poupay'
+    compileSdk 34
 
     defaultConfig {
-        applicationId "com.project.poupay"
+        applicationId "com.projeto.poupay"
         minSdk 21
-        targetSdk 33
-        versionCode 60
-        versionName "Versão 0.6 - Teste"
+        targetSdk 34
+        versionCode 70
+        versionName "0.7"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -26,42 +27,45 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
 }
 
 dependencies {
-    // Driver do PostgreSQL
-    implementation 'org.postgresql:postgresql:9.4.1207'
 
-    // Alerter
-    implementation 'com.github.tapadoo:alerter:7.2.4'
-
-    // CurrencyEditText
-    implementation 'com.github.marcoscgdev:CurrencyEditText:1.0.1'
-
-    // PowerSpinner
-    implementation "com.github.skydoves:powerspinner:1.2.6"
-
-    // Biometric
-    implementation "androidx.biometric:biometric:1.1.0"
-
-    // Calculator
-    implementation 'net.objecthunter:exp4j:0.4.8'
-
-    // MPAndroidChart
-    implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
-
-    // StringUtils
-    implementation  'org.apache.commons:commons-lang3:3.0'
-
-    // JExcelApi
-    implementation group: 'net.sourceforge.jexcelapi', name: 'jxl', version: '2.6'
-
-
+    implementation 'androidx.core:core-ktx:1.7.0'
     implementation 'androidx.appcompat:appcompat:1.6.1'
     implementation 'com.google.android.material:material:1.9.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
     testImplementation 'junit:junit:4.13.2'
-    testImplementation 'org.mockito:mockito-core:1.10.19'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.1'
+
+    // Driver do PostgreSQL
+    implementation("org.postgresql:postgresql:9.4.1207")
+
+    // Alerter
+    implementation("com.github.tapadoo:alerter:7.2.4")
+
+    // CurrencyEditText
+    implementation("com.github.marcoscgdev:CurrencyEditText:1.0.1")
+
+    // PowerSpinner
+    implementation("com.github.skydoves:powerspinner:1.2.6")
+
+    // Biometric
+    implementation("androidx.biometric:biometric:1.1.0")
+
+    // Calculator
+    implementation("net.objecthunter:exp4j:0.4.8")
+
+    // MPAndroidChart
+    implementation("com.github.PhilJay:MPAndroidChart:v3.1.0")
+
+    // StringUtils
+    implementation("org.apache.commons:commons-lang3:3.0")
+
+    // JExcelApi
+    implementation("net.sourceforge.jexcelapi:jxl:2.6")
 }
