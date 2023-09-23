@@ -41,7 +41,7 @@ class SigninActivity : AppCompatActivity() {
         hideKeyboard()
         if (validateFields()) {
             setLoadingMode(true)
-            val loginQuery = "SELECT INTO usuarios VALUES('${mUsername.text}', '${mPasswordConfirm.text}');"
+            val loginQuery = "INSERT INTO usuarios VALUES('${mUsername.text}', '${mPasswordConfirm.text}');"
             Sql(loginQuery, this) { _, exception ->
                 if (exception == null) {
                     showSucessDialog()
@@ -82,7 +82,7 @@ class SigninActivity : AppCompatActivity() {
     private fun validateFields(): Boolean {
         var pass = FieldValidator.validate(mUsername, FieldValidator.Type.USERNAME) &&
                 FieldValidator.validate(mPassword, FieldValidator.Type.PASSWORD)
-        if(mPassword.text != mPasswordConfirm.text){
+        if(mPassword.text.toString() != mPasswordConfirm.text.toString()){
             pass = false
             mPasswordConfirm.error = "As senhas não são iguais."
         }
