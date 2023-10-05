@@ -185,7 +185,7 @@
         android:src="@drawable/bg_middle_button"
         app:tint="#56000000" />
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/Main_AddLayout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/bottom_add_layout_height"
@@ -196,7 +196,9 @@
         android:elevation="4dp"
         android:gravity="center_horizontal"
         android:orientation="vertical"
-        android:translationY="@dimen/bottom_add_layout_height">
+        android:translationY="@dimen/bottom_add_layout_height"
+        tools:translationY="0dp">
+
 
         <com.projeto.poupay.view.SwitchSelector
             android:id="@+id/Add_InputType"
@@ -205,17 +207,31 @@
             android:layout_marginStart="12dp"
             android:layout_marginTop="32dp"
             android:layout_marginEnd="12dp"
+            app:layout_constraintTop_toTopOf="parent"
             app:options_list="@array/switchselector_inputType"
             app:text_size="14sp" />
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/Add_DatePicker"
+            android:layout_width="wrap_content"
+            app:layout_constraintTop_toTopOf="@id/Add_Value"
+            app:layout_constraintBottom_toBottomOf="@id/Add_Value"
+            app:layout_constraintRight_toRightOf="parent"
+            android:layout_height="wrap_content"
+            android:src="@drawable/ic_calendar"
+            app:fabSize="mini"
+            android:importantForAccessibility="no" />
+
         <TextView
+            android:id="@+id/Add_LabelValue"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16sp"
             android:text="@string/txt_value"
             android:textColor="@color/background"
             android:textSize="16sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintTop_toBottomOf="@id/Add_InputType" />
 
         <com.marcoscg.currencyedittext.CurrencyEditText
             android:id="@+id/Add_Value"
@@ -228,9 +244,25 @@
             android:textAlignment="textStart"
             android:textColor="@color/background"
             android:textColorHint="#B7B7B7"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/Add_LabelValue" />
 
         <TextView
+            android:id="@+id/Add_LabelDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/txt_value"
+            android:gravity="center_horizontal"
+            android:textColor="#B3B3B3"
+            android:textSize="14sp"
+            tools:text="14/09/2023"
+            app:layout_constraintTop_toBottomOf="@id/Add_Value" />
+
+        <TextView
+            android:id="@+id/Add_LabelDescription"
+            app:layout_constraintTop_toBottomOf="@id/Add_Value"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
@@ -250,6 +282,9 @@
             android:importantForAutofill="no"
             android:inputType="text"
             android:lines="1"
+            app:layout_constraintTop_toBottomOf="@id/Add_LabelDescription"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
             android:padding="4dp"
             android:textColor="@color/background"
             android:textColorHint="#B7B7B7"
@@ -260,10 +295,12 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="8dp"
+            app:layout_constraintTop_toBottomOf="@id/Add_Details"
             app:options_list="@array/switchselector_paymentType"
             app:text_size="14sp" />
 
         <LinearLayout
+            app:layout_constraintTop_toBottomOf="@id/Add_Type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -308,7 +345,7 @@
                 app:backgroundTint="@null" />
         </LinearLayout>
 
-    </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
     <ProgressBar
@@ -316,25 +353,25 @@
         style="@android:style/Widget.DeviceDefault.Light.ProgressBar"
         android:layout_width="60dp"
         android:layout_height="60dp"
-        android:paddingTop="220dp"
-        android:paddingBottom="84dp"
         android:layout_gravity="center"
         android:elevation="10dp"
         android:indeterminate="true"
         android:indeterminateTint="@color/background"
+        android:paddingTop="220dp"
+        android:paddingBottom="84dp"
         android:visibility="visible" />
 
 
     <TextView
         android:id="@+id/Main_Empty"
-        android:visibility="gone"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/no_entries"
         android:layout_gravity="center"
-        android:paddingTop="80dp"
-        android:textStyle="bold"
         android:alpha="0.15"
+        android:paddingTop="80dp"
+        android:text="@string/no_entries"
+        android:textStyle="bold"
+        android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_box" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

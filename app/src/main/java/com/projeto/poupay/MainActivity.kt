@@ -11,10 +11,10 @@ import android.view.animation.AnimationUtils
 import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
-import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -69,11 +69,17 @@ class MainActivity : AppCompatActivity() {
         calculatorDialog = MainActivityCalculator(this)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setOnItemSelectedListener {
-            if (it.itemId == R.id.calculator) calculatorDialog.show()
+            if (it.itemId == R.id.reminds) startActivity(Intent(this@MainActivity, RemindersActivity::class.java))
             if (it.itemId == R.id.reports) startActivity(Intent(this@MainActivity, ReportsActivity::class.java))
             if (it.itemId == R.id.plans) startActivity(Intent(this@MainActivity, PlansActivity::class.java))
+            if (it.itemId == R.id.calculator) calculatorDialog.show()
             return@setOnItemSelectedListener true
         }
+    }
+
+    override fun onRestart() {
+        super.onRestart()
+        filterSelector.setSelectedButton(0)
     }
 
     override fun onBackPressed() {
@@ -126,8 +132,8 @@ class MainActivity : AppCompatActivity() {
         findViewById<TextView>(R.id.Main_Header_Out).text = getString(R.string.null_value)
         setLoadingMode(true)
 
-        var initDate = 0L
-        var finalDate = 0L
+        var initDate: Long
+        var finalDate: Long
         when (indexFilter) {
             0 -> subtitle.text = getString(R.string.subtitle_days)
             1 -> subtitle.text = getString(R.string.subtitle_month)
@@ -184,13 +190,6 @@ class MainActivity : AppCompatActivity() {
                     showErrorMessage(R.string.sqlerror)
                 })
             }
-
-            else -> {
-                SqlQueries.getEntry(this, initDate, finalDate, { items ->
-                    adapter.add(items)
-                    updateHeader()
-                }, { showErrorMessage(R.string.sqlerror) })
-            }
         }
     }
 
@@ -201,6 +200,8 @@ class MainActivity : AppCompatActivity() {
         val value = findViewById<CurrencyEditText>(R.id.Add_Value)
         val inputType = findViewById<SwitchSelector>(R.id.Add_InputType)
         val moneyType = findViewById<SwitchSelector>(R.id.Add_Type)
+        val dateLabel = findViewById<TextView>(R.id.Add_LabelDate)
+        val dateSwitch = findViewById<FloatingActionButton>(R.id.Add_DatePicker)
 
         value.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {}
@@ -217,11 +218,7 @@ class MainActivity : AppCompatActivity() {
 
         inputType.onSelectChangeListener = { id, _ ->
             value.setTextColor(resources.getColor(if (id == 0) R.color.red else R.color.green, null))
-            moneyPortion.visibility = if (moneyType.selectedId == 1 && id == 0 && value.getNumericValue() >= 1) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            moneyPortion.isVisible = moneyType.selectedId == 1 && id == 0 && value.getNumericValue() >= 1
         }
         inputType.setSelectedButton(0)
 
@@ -230,13 +227,33 @@ class MainActivity : AppCompatActivity() {
         moneyType.setButtonIcon(2, R.drawable.ic_baseline_pix_36)
         moneyType.setButtonIcon(3, R.drawable.ic_payment_other_36)
         moneyType.onSelectChangeListener = { id, _ ->
-            moneyPortion.visibility = if (id == 1 && inputType.selectedId == 0 && value.getNumericValue() >= 1) {
-                View.VISIBLE
-            } else {
-                View.GONE
-            }
+            moneyPortion.isVisible = id == 1 && inputType.selectedId == 0 && value.getNumericValue() >= 1
             updateCardSpinner()
         }
+
+        dateLabel.text = getString(R.string.now)
+        var dateString = "now()"
+        dateSwitch.setOnClickListener {
+            val materialDatePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("SELECIONE UMA DATA")
+                .setPositiveButtonText("Selecionar")
+                .build()
+
+            materialDatePicker.show(supportFragmentManager, "MATERAL_DATE_PICKER")
+            materialDatePicker.addOnPositiveButtonClickListener {
+                val calendar = Calendar.getInstance(TimeZone.getTimeZone("UTC"))
+                val format = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
+                format.timeZone = TimeZone.getTimeZone("UTC")
+                calendar.timeInMillis = it
+                val textDate = format.format(calendar.time)
+                dateLabel.text = textDate
+
+                val format2 = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+                format2.timeZone = TimeZone.getTimeZone("UTC")
+                dateString = format2.format(calendar.time)
+            }
+        }
+
 
         findViewById<View>(R.id.Add_Confirm).setOnClickListener {
             if (validateAddField()) {
@@ -245,8 +262,7 @@ class MainActivity : AppCompatActivity() {
                 val sqlCategory = moneyType.selectedId
                 val sqlPortion: Int? = if (moneyType.selectedId == 1) moneyPortion.selectedIndex + 1 else null
 
-                SqlQueries.addEntry(sqlValue, sqlDesc, sqlCategory, sqlPortion, this, {
-                    MessageAlert.create(this, MessageAlert.Type.SUCCESS, "Lançamento inserido com sucesso.")
+                SqlQueries.addEntry(sqlValue, sqlDesc, sqlCategory, sqlPortion, this, dateString, {
                     update(indexFilter)
                 }, { showErrorMessage(R.string.sqlerror) })
 
@@ -255,6 +271,8 @@ class MainActivity : AppCompatActivity() {
                 moneyType.setSelectedButton(0)
                 value.setText("0")
                 details.setText("")
+                dateString = "now()"
+                dateLabel.text = getString(R.string.now)
                 hideKeyboard()
             }
         }
@@ -265,7 +283,7 @@ class MainActivity : AppCompatActivity() {
         isAddVisible = visibility ?: !isAddVisible
 
         val fab = findViewById<FloatingActionButton>(R.id.btn_add)
-        val addLayout = findViewById<LinearLayout>(R.id.Main_AddLayout)
+        val addLayout = findViewById<ConstraintLayout>(R.id.Main_AddLayout)
         val value = findViewById<CurrencyEditText>(R.id.Add_Value)
         val details = findViewById<EditText>(R.id.Add_Details)
 

@@ -3,6 +3,7 @@ package com.projeto.poupay.sql
 import android.content.Context
 import com.projeto.poupay.plans.views.ContentPlanItem
 import com.projeto.poupay.plans.views.Plan
+import com.projeto.poupay.reminders.ReminderEntry
 import com.projeto.poupay.view.ContentItem
 import com.projeto.poupay.view.ContentReportItem
 import org.apache.commons.lang3.StringUtils
@@ -23,10 +24,12 @@ class SqlQueries {
         private const val FILTER_MONTH = 1
         private const val FILTER_YEAR = 2
 
-        fun addEntry(value: Double, description: String, category: Int, portion: Int?, context: Context, sucessListener: () -> Unit, failListener: (exceprion: SQLException) -> Unit) {
+        fun addEntry(value: Double, description: String, category: Int, portion: Int?, context: Context, date: String = "now()", sucessListener: () -> Unit, failListener: (exceprion: SQLException) -> Unit) {
+            val condition = if (date == "now()") true else SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)?.before(java.util.Date()) ?: false
+            val stringDate = if (date == "now()") date else "'$date'"
             val parcelas = portion?.toString() ?: "NULL"
-            val query = "INSERT INTO transacoes(usuario_nome, valor, data, descricao, categoria_id, parcelas) " +
-                    "VALUES('$username',$value,now(), '$description', $category, $parcelas);"
+            val query = "INSERT INTO transacoes(usuario_nome, valor, data, descricao, categoria_id, parcelas, condicao) " +
+                    "VALUES('$username',$value,$stringDate, '$description', $category, $parcelas, $condition);"
 
             Sql(query, context) { _, queryException ->
                 if (queryException == null) sucessListener.invoke()
@@ -99,6 +102,51 @@ class SqlQueries {
             }.start()
         }
 
+        fun getFutureEntry(context: Context, filter: Int = 0, sucessListener: (MutableList<ReminderEntry>) -> Unit, failListener: (exception: SQLException) -> Unit, filteredDate: Pair<Long, Long> = Pair(0L, 0L)) {
+
+            val dateFormat = when (filter) {
+                1 -> SimpleDateFormat("MMMM 'de' yyyy", Locale.getDefault())
+                2 -> SimpleDateFormat("yyyy", Locale.getDefault())
+                else -> SimpleDateFormat("dd 'de' MMMM 'de' yyyy", Locale.getDefault())
+            }
+            dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+            val initDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(filteredDate.first)
+            val finalDate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(filteredDate.second)
+
+            val query = "SELECT id, valor, data, descricao, categoria_id, parcelas, condicao " +
+                    "FROM transacoes " +
+                    "WHERE usuario_nome = '$username' and data > now() ${if (filter == 3) "and data > '$initDate' and data < '$finalDate'" else ""} " +
+                    "ORDER BY data"
+
+            Sql(query, context) { result, queryException ->
+                if (queryException != null) failListener.invoke(queryException)
+                else if (result == null) failListener.invoke(SQLException())
+                else {
+                    try {
+                        val remindersList: MutableList<ReminderEntry> = ArrayList()
+                        while (result.next()) {
+                            remindersList.add(
+                                ReminderEntry(
+                                    id = result.getInt("id"),
+                                    value = result.getDouble("valor"),
+                                    date = result.getDate("data"),
+                                    description = result.getString("descricao"),
+                                    category = result.getInt("categoria_id"),
+                                    parcels = result.getInt("parcelas"),
+                                    condition = result.getBoolean("condicao"),
+                                    stringDate = dateFormat.format(result.getDate("data"))
+                                )
+                            )
+                        }
+                        sucessListener.invoke(remindersList)
+                    } catch (exception: SQLException) {
+                        failListener.invoke(exception)
+                    }
+                }
+            }.start()
+        }
+
         fun getEntry(context: Context, filter: Int, sucessListener: (contents: MutableList<ContentItem>) -> Unit, failListener: (SQLException) -> Unit) {
             var query = ""
             when (filter) {
@@ -122,6 +170,7 @@ class SqlQueries {
                     "SELECT sum(valor) as valor,to_char(date_trunc('year', data), 'YYYY') as year,categoria_id,nome as categoria FROM transacoes \n" +
                             "INNER JOIN categorias c ON categoria_id = c.id\n" +
                             "AND usuario_nome = '$username'\n" +
+                            "AND data < now()\n" +
                             "GROUP BY to_char(date_trunc('year', data), 'YYYY'), categoria_id, nome, year\n" +
                             "ORDER BY to_char(date_trunc('year', data), 'YYYY') DESC"
             }
@@ -206,7 +255,7 @@ class SqlQueries {
         }
 
         fun getHeader(context: Context, sucessListener: (total: Double, outcome: Double, income: Double) -> Unit, failListener: (exception: SQLException) -> Unit) {
-            val query = "SELECT sum(valor) as total, sum(valor) filter (where valor >= 0) as receita, sum(valor) filter (where valor < 0) as despesa FROM transacoes WHERE usuario_nome = '$username';"
+            val query = "SELECT sum(valor) as total, sum(valor) filter (where valor >= 0) as receita, sum(valor) filter (where valor < 0) as despesa FROM transacoes WHERE usuario_nome = '$username' and data < now();"
             Sql(query, context) { result, queryException ->
                 if (queryException != null) failListener.invoke(queryException)
                 else if (result == null) failListener.invoke(SQLException())
@@ -277,6 +326,14 @@ class SqlQueries {
 
         fun deletePlan(planId: Int, context: Context, sucessListener: () -> Unit, failListener: (exception: SQLException) -> Unit) {
             val query = "DELETE FROM planejamentos WHERE id = $planId;"
+            Sql(query, context) { _, queryException ->
+                if (queryException != null) failListener.invoke(queryException)
+                else sucessListener.invoke()
+            }.start()
+        }
+
+        fun finishReminder(context: Context, id: Int, sucessListener: () -> Unit, failListener: (exception: SQLException) -> Unit) {
+            val query = "UPDATE transacoes SET data = now() WHERE ID = $id;"
             Sql(query, context) { _, queryException ->
                 if (queryException != null) failListener.invoke(queryException)
                 else sucessListener.invoke()

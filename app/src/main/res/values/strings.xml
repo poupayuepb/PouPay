@@ -71,4 +71,7 @@
     <string name="delete_ask">Você tem certeza que deseja deletar esta entidade?</string>
     <string name="no_plans">Não há planos para exibir.</string>
     <string name="no_entries">Não há registros para exibir.</string>
+    <string name="reminders">Lembretes</string>
+    <string name="now">Agora</string>
+    <string name="confirm">Confirmar</string>
 </resources>

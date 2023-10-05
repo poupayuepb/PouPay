@@ -12,4 +12,8 @@
     <color name="orange">#FF7043</color>
     <color name="pix">#2EBDAF</color>
 
+    <color name="blue_light">#90CAF9</color>
+    <color name="green_light">#A5D6A7</color>
+    <color name="orange_light">#FFAB91</color>
+    <color name="pix_light">#B7EFEA</color>
 </resources>

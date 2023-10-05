@@ -2,13 +2,14 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
+        android:id="@+id/reminds"
         android:title="@string/reminds"
-        android:icon="@drawable/ic_baseline_notification_24"/>
+        android:icon="@drawable/ic_reminders"/>
 
     <item
         android:id="@+id/reports"
         android:title="@string/logs"
-        android:icon="@drawable/ic_baseline_graphic_chart_24"/>
+        android:icon="@drawable/ic_reports"/>
 
     <item
         android:title=""
@@ -17,7 +18,7 @@
     <item
         android:id="@+id/plans"
         android:title="@string/plains"
-        android:icon="@drawable/ic_baseline_plans_local_atm_24"/>
+        android:icon="@drawable/ic_plans"/>
 
     <item
         android:id="@+id/calculator"

@@ -63,7 +63,6 @@ class PlansActivity : AppCompatActivity() {
             SqlQueries.addPlanValue(id, value, detail, this@PlansActivity, {
                 updateAll()
             }, {
-                println(it.message)
                 showErroMessage(R.string.connection_error)
             })
         }

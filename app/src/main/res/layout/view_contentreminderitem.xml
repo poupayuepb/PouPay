@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/ContentReminderItem_Root"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="@drawable/container_components"
+    android:backgroundTint="#C6E1F6"
+    android:gravity="center"
+    android:padding="6dp">
+
+    <CheckBox
+        android:id="@+id/ContentReminderItem_checkbox"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:buttonTint="@color/white"
+        android:checked="false"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.imageview.ShapeableImageView
+        android:id="@+id/ContentReminderItem_Image"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@color/blue"
+        android:padding="2dp"
+        android:scaleType="centerInside"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContentReminderItem_checkbox"
+        app:shapeAppearanceOverlay="@style/rounded_shap"
+        app:srcCompat="@drawable/ic_card_24" />
+
+    <TextView
+        android:id="@+id/ContentReminderItem_Title"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:lines="1"
+        android:minWidth="150dp"
+        android:paddingHorizontal="6dp"
+        android:textColor="@color/blue"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="@+id/ContentReminderItem_Image"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/ContentReminderItem_Image"
+        app:layout_constraintTop_toTopOf="@+id/ContentReminderItem_Image"
+        tools:text="R$ 100,00" />
+
+    <TextView
+        android:id="@+id/ContentReminderItem_Description"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:lines="1"
+        android:textColor="@color/black"
+        android:textSize="14sp"
+        app:layout_constraintEnd_toStartOf="@+id/ContentReminderItem_Notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContentReminderItem_Image"
+        tools:text="Pagar conta" />
+
+    <TextView
+        android:id="@+id/ContentReminderItem_Parcels"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:lines="1"
+        android:textColor="#575757"
+        android:textSize="12sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/ContentReminderItem_Notification"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContentReminderItem_Description"
+        tools:text="2/5 parcelas" />
+
+    <ImageView
+        android:id="@+id/ContentReminderItem_Notification"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:importantForAccessibility="no"
+        android:padding="8dp"
+        android:src="@drawable/ic_reminders_on"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ContentReminderItem_Image" />
+</androidx.constraintlayout.widget.ConstraintLayout>
