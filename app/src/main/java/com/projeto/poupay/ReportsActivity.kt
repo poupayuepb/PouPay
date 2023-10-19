@@ -160,7 +160,7 @@ class ReportsActivity : AppCompatActivity() {
     private fun updateAll() {
         setLoadingMode(true)
         val date = Calendar.getInstance().time
-        val dateString = SimpleDateFormat("dd", Locale.getDefault()).format(date) + " de " + SimpleDateFormat("MMMM", Locale.getDefault()).format(date)
+        val dateString = SimpleDateFormat("dd 'de' MMMM", Locale.getDefault()).format(date)
         findViewById<TextView>(R.id.Reports_Date).text = dateString
 
         adapter.clear()
@@ -230,7 +230,7 @@ class ReportsActivity : AppCompatActivity() {
         chart.setCenterTextColor(ResourcesCompat.getColor(resources, R.color.background, null))
         chart.setCenterTextTypeface(Typeface.DEFAULT_BOLD)
         chart.setCenterTextSize(18F)
-        chart.centerText = "$monString \nde $year"
+        chart.centerText = if(month>=0) "$monString \nde $year" else "$year"
     }
 
     private fun setLoadingMode(active: Boolean) {

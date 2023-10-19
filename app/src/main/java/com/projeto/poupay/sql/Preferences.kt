@@ -11,7 +11,7 @@ class Preferences {
     }
 
     companion object {
-        private const val prefsId = "com.project.poupay"
+        private var prefsId = "com.project.poupay.${SqlQueries.username}."
 
         fun set(entry: Entry, value: Boolean, context: Context) {
             context.getSharedPreferences(prefsId, MODE_PRIVATE)

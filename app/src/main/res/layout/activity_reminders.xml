@@ -77,7 +77,7 @@
             android:backgroundTint="#82FFFFFF">
 
             <TextView
-                android:id="@+id/Reminders_Header_Out"
+                android:id="@+id/Reminders_HeaderOut"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentStart="true"
@@ -91,7 +91,7 @@
                 app:drawableLeftCompat="@drawable/ic_baseline_arrow_circle_down_24" />
 
             <TextView
-                android:id="@+id/Reminders_Header_In"
+                android:id="@+id/Reminders_HeaderIn"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
@@ -140,5 +140,14 @@
         android:textStyle="bold"
         android:visibility="gone"
         app:drawableTopCompat="@drawable/ic_box" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/Reminders_AddButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:layout_margin="18dp"
+        android:src="@drawable/ic_baseline_add_24"
+        android:importantForAccessibility="no" />
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

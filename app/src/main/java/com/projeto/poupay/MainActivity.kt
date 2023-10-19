@@ -12,6 +12,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.constraintlayout.widget.ConstraintLayout
@@ -47,6 +48,10 @@ class MainActivity : AppCompatActivity() {
     private var isAddVisible = false
     private var indexFilter = 0
 
+    private var resultRemindsButton = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+        if (it.resultCode == RemindersActivity.RESULT_CLICKED) showAddDialog(true)
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -69,7 +74,7 @@ class MainActivity : AppCompatActivity() {
         calculatorDialog = MainActivityCalculator(this)
         val bottomNavigationView = findViewById<BottomNavigationView>(R.id.bottomNavigation)
         bottomNavigationView.setOnItemSelectedListener {
-            if (it.itemId == R.id.reminds) startActivity(Intent(this@MainActivity, RemindersActivity::class.java))
+            if (it.itemId == R.id.reminds) resultRemindsButton.launch(Intent(this@MainActivity, RemindersActivity::class.java))
             if (it.itemId == R.id.reports) startActivity(Intent(this@MainActivity, ReportsActivity::class.java))
             if (it.itemId == R.id.plans) startActivity(Intent(this@MainActivity, PlansActivity::class.java))
             if (it.itemId == R.id.calculator) calculatorDialog.show()

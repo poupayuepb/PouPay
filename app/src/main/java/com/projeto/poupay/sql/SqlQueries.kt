@@ -116,7 +116,9 @@ class SqlQueries {
 
             val query = "SELECT id, valor, data, descricao, categoria_id, parcelas, condicao " +
                     "FROM transacoes " +
-                    "WHERE usuario_nome = '$username' and data > now() ${if (filter == 3) "and data > '$initDate' and data < '$finalDate'" else ""} " +
+                    "WHERE usuario_nome = '$username' " +
+                    "and condicao = false " +
+                    "${if (filter == 3) "and data > '$initDate' and data < '$finalDate'" else ""} " +
                     "ORDER BY data"
 
             Sql(query, context) { result, queryException ->
@@ -155,6 +157,7 @@ class SqlQueries {
                             "INNER JOIN categorias c ON categoria_id = c.id\n" +
                             "WHERE data >= current_date - 7\n" +
                             "AND data < now()\n" +
+                            "AND condicao = true\n" +
                             "AND usuario_nome = '$username'\n" + "ORDER BY data DESC"
 
                 FILTER_MONTH -> query =
@@ -162,6 +165,7 @@ class SqlQueries {
                             "INNER JOIN categorias c ON categoria_id = c.id\n" +
                             "WHERE data >= current_date - interval '1 year'\n" +
                             "AND data < now()\n" +
+                            "AND condicao = true\n" +
                             "AND usuario_nome = '$username'\n" +
                             "GROUP BY to_char(date_trunc('month', data), 'YYMM'), categoria_id, nome, month\n" +
                             "ORDER BY to_char(date_trunc('month', data), 'YYMM') DESC"
@@ -171,6 +175,7 @@ class SqlQueries {
                             "INNER JOIN categorias c ON categoria_id = c.id\n" +
                             "AND usuario_nome = '$username'\n" +
                             "AND data < now()\n" +
+                            "AND condicao = true\n" +
                             "GROUP BY to_char(date_trunc('year', data), 'YYYY'), categoria_id, nome, year\n" +
                             "ORDER BY to_char(date_trunc('year', data), 'YYYY') DESC"
             }
@@ -226,6 +231,7 @@ class SqlQueries {
                     "INNER JOIN categorias c ON categoria_id = c.id\n" +
                     "WHERE data >= '" + dateInitFormated + " 00:00:00'::timestamp \n" +
                     "AND data < '" + dateEndFormated + " 23:59:59'::timestamp\n" +
+                    "AND condicao = true\n" +
                     "AND usuario_nome = '" + username + "'\n" +
                     "ORDER BY data DESC"
             Sql(query, context) { result, queryException ->
@@ -255,7 +261,11 @@ class SqlQueries {
         }
 
         fun getHeader(context: Context, sucessListener: (total: Double, outcome: Double, income: Double) -> Unit, failListener: (exception: SQLException) -> Unit) {
-            val query = "SELECT sum(valor) as total, sum(valor) filter (where valor >= 0) as receita, sum(valor) filter (where valor < 0) as despesa FROM transacoes WHERE usuario_nome = '$username' and data < now();"
+            val query = "SELECT sum(valor) as total, sum(valor) filter (where valor >= 0) as receita, sum(valor) filter (where valor < 0) as despesa " +
+                    "FROM transacoes " +
+                    "WHERE usuario_nome = '$username' " +
+                    "AND condicao = true\n" +
+                    "and data < now();"
             Sql(query, context) { result, queryException ->
                 if (queryException != null) failListener.invoke(queryException)
                 else if (result == null) failListener.invoke(SQLException())
@@ -279,14 +289,20 @@ class SqlQueries {
         }
 
         fun getReportItems(context: Context, type: Int, category: Int, year: Int, month: Int, sucessListener: (items: MutableList<ContentReportItem>) -> Unit, failListener: (exception: SQLException) -> Unit) {
+
+            val dateLike = if (month >= 0)
+                "$year-${if (month < 10) "0" else ""}$month%"
+            else
+                "$year-%"
+
             val query = if (category == 0) {
                 "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, LOWER(descricao) as desc\n" +
                         "FROM (SELECT valor, data, descricao FROM transacoes WHERE valor ${if (type == 1) ">=" else "<"} 0 AND usuario_nome = '$username') as t\n" +
-                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$year-${if (month < 10) "0" else ""}$month%' GROUP BY month, descricao;"
+                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$dateLike' GROUP BY month, descricao;"
             } else {
                 "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, nome as desc\n" +
                         "FROM (SELECT valor, data, nome FROM transacoes INNER JOIN categorias ON categoria_id = categorias.id WHERE valor ${if (type == 1) ">=" else "<"} 0 AND usuario_nome = '$username') as t\n" +
-                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$year-${if (month < 10) "0" else ""}$month%'\n" +
+                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$dateLike'\n" +
                         "GROUP BY month, nome;"
             }
             Sql(query, context) { result, queryException ->
@@ -333,7 +349,7 @@ class SqlQueries {
         }
 
         fun finishReminder(context: Context, id: Int, sucessListener: () -> Unit, failListener: (exception: SQLException) -> Unit) {
-            val query = "UPDATE transacoes SET data = now() WHERE ID = $id;"
+            val query = "UPDATE transacoes SET data = now(), condicao = true WHERE ID = $id;"
             Sql(query, context) { _, queryException ->
                 if (queryException != null) failListener.invoke(queryException)
                 else sucessListener.invoke()

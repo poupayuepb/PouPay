@@ -6,12 +6,10 @@
         android:fontStyle="normal"
         android:fontWeight="400"
         android:font="@font/quicksand_regular"
-        tools:targetApi="o"
         />
     <font
         android:fontStyle="normal"
         android:fontWeight="700"
         android:font="@font/quicksand_bold"
-        tools:targetApi="o"
         />
 </font-family>

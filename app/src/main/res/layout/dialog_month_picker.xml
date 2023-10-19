@@ -22,9 +22,9 @@
         app:drawableTopCompat="@drawable/ic_calendar" />
 
     <LinearLayout
-        android:layout_marginTop="12dp"
         android:layout_width="match_parent"
         android:layout_height="56dp"
+        android:layout_marginTop="12dp"
         android:orientation="horizontal">
 
         <ImageView
@@ -32,9 +32,9 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_baseline_keyboard_arrow_left_24"
-            app:tint="@color/white"
-            android:importantForAccessibility="no" />
+            app:tint="@color/white" />
 
         <TextView
             android:id="@+id/Month_Picker_Year"
@@ -52,18 +52,28 @@
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:importantForAccessibility="no"
             android:src="@drawable/ic_baseline_keyboard_arrow_right_24"
-            app:tint="@color/white"
-            android:importantForAccessibility="no" />
+            app:tint="@color/white" />
 
 
     </LinearLayout>
 
+    <CheckBox
+        android:id="@+id/Month_Picker_YearEntire"
+        android:layout_gravity="center_horizontal"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        android:textColor="@color/white"
+        android:buttonTint="@color/white"
+        android:text="@string/entire_year"/>
+
     <GridLayout
         android:id="@+id/Month_Picker_Month_Layout"
         android:layout_width="wrap_content"
-        android:layout_gravity="center"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
         android:columnCount="4"
         android:paddingHorizontal="32dp"
         android:rowCount="3"

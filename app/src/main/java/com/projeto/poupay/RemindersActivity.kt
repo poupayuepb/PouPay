@@ -1,13 +1,17 @@
 package com.projeto.poupay
 
+import android.Manifest
+import android.content.pm.PackageManager
+import android.os.Build
 import android.os.Bundle
-import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityCompat
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.datepicker.MaterialDatePicker
 import com.projeto.poupay.alerts.MessageAlert
+import com.projeto.poupay.alerts.NotificationReminderWorker
 import com.projeto.poupay.databinding.ActivityRemindersBinding
 import com.projeto.poupay.reminders.RemindersAdapter
 import com.projeto.poupay.sql.SqlQueries
@@ -16,10 +20,9 @@ import java.text.SimpleDateFormat
 import java.util.Calendar
 import java.util.Date
 import java.util.Locale
-import java.util.TimeZone
 
 class RemindersActivity : AppCompatActivity() {
-
+    private var notificationEnabled: Boolean = false
     private lateinit var binding: ActivityRemindersBinding
     private lateinit var adapter: RemindersAdapter
 
@@ -63,6 +66,7 @@ class RemindersActivity : AppCompatActivity() {
                     SqlQueries.finishReminder(this, contentItem.id, {
                         checkbox.isEnabled = false
                         setLoadingMode(false)
+                        NotificationReminderWorker.cancel(this, contentItem)
                     }, {
                         showErroMessage(R.string.sqlerror)
                         checkbox.isChecked = false
@@ -75,7 +79,34 @@ class RemindersActivity : AppCompatActivity() {
         }
 
         adapter.onItemNotificationChangeListener = { contentItem, isChecked ->
-            // TODO: Implementar quando o botao de notificação é clicado
+            if (notificationEnabled) {
+                if (isChecked) {
+                    NotificationReminderWorker.start(this, contentItem)
+                } else {
+                    NotificationReminderWorker.cancel(this, contentItem)
+                }
+            }
+        }
+
+        binding.RemindersAddButton.setOnClickListener {
+            setResult(RESULT_CLICKED)
+            finish()
+        }
+
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED)
+            requestNotificationPermission()
+        else notificationEnabled = true
+    }
+
+    private fun requestNotificationPermission() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            registerForActivityResult(
+                ActivityResultContracts.RequestPermission()
+            ) { isGranted ->
+                this.notificationEnabled = isGranted
+                if (isGranted) MessageAlert.create(this, MessageAlert.Type.SUCCESS, "Notificações habilitadas.")
+                else MessageAlert.create(this, MessageAlert.Type.ERROR, "Notificações não serão exibidas.")
+            }.launch(Manifest.permission.POST_NOTIFICATIONS)
         }
     }
 
@@ -111,5 +142,9 @@ class RemindersActivity : AppCompatActivity() {
         binding.RemindersClose.isEnabled = !active
         binding.RemindersFilterSelector.isEnabled = !active
 
+    }
+
+    companion object {
+        const val RESULT_CLICKED = 1
     }
 }

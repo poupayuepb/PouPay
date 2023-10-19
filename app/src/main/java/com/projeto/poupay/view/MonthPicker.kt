@@ -3,11 +3,13 @@ package com.projeto.poupay.view
 import android.app.AlertDialog
 import android.content.Context
 import android.view.View
+import android.widget.CheckBox
 import android.widget.GridLayout
 import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
+import androidx.core.view.isVisible
 import com.projeto.poupay.R
 import org.apache.commons.lang3.StringUtils
 import java.text.SimpleDateFormat
@@ -19,6 +21,7 @@ class MonthPicker(context: Context) : LinearLayout(context) {
     private var year = 0
     private var month = 0
     private var alertContent: View
+    private var yearOnly: CheckBox
     var onMonthPickerListener: (month: Int, year: Int) -> Unit = { _, _ -> }
 
     init {
@@ -53,6 +56,12 @@ class MonthPicker(context: Context) : LinearLayout(context) {
                 update()
             }
         }
+
+        yearOnly = alertContent.findViewById(R.id.Month_Picker_YearEntire)
+        yearOnly.setOnCheckedChangeListener { _, isOn ->
+            monthLayout.isVisible = !isOn
+        }
+
         update()
     }
 
@@ -80,7 +89,8 @@ class MonthPicker(context: Context) : LinearLayout(context) {
                 dialog.dismiss()
             }
             findViewById<View>(R.id.Month_Picker_Confirm).setOnClickListener {
-                onMonthPickerListener.invoke(month, year)
+                val monthOutput = if (yearOnly.isChecked) -1 else month
+                onMonthPickerListener.invoke(monthOutput, year)
                 dialog.dismiss()
             }
         }
