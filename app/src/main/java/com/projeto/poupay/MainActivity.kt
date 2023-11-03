@@ -265,7 +265,7 @@ class MainActivity : AppCompatActivity() {
                 val sqlValue = value.getNumericValue() * (if (inputType.selectedId == 0) -1 else 1)
                 val sqlDesc = details.text.toString()
                 val sqlCategory = moneyType.selectedId
-                val sqlPortion: Int? = if (moneyType.selectedId == 1) moneyPortion.selectedIndex + 1 else null
+                val sqlPortion: Int = if (moneyType.selectedId == 1) moneyPortion.selectedIndex + 1 else 0
 
                 SqlQueries.addEntry(sqlValue, sqlDesc, sqlCategory, sqlPortion, this, dateString, {
                     update(indexFilter)

@@ -81,10 +81,12 @@ class ReportsActivity : AppCompatActivity() {
         list.layoutManager = LinearLayoutManager(this)
         adapter = ListContentAdapter()
         list.adapter = adapter
+        adapter.setOnItemClickListener {
+            println(it.title)
+        }
 
         categoryType = findViewById(R.id.Reports_Category)
         categoryType.onSelectChangeListener = { _, _ -> updateAll() }
-
 
         reportType = findViewById(R.id.Reports_Type)
         reportType.onSelectChangeListener = { _, _ -> updateAll() }
@@ -174,9 +176,9 @@ class ReportsActivity : AppCompatActivity() {
             var total = 0.0
             var others = 0.0F
 
-            for (item in it) total += item.value
+            for (item in adapter.getByTitle()) total += item.value
 
-            for (item in it) {
+            for (item in adapter.getByTitle()) {
                 val percentage = (item.value / total).toFloat()
                 if (entries.size >= 8 || percentage <= 0.05) others += percentage
                 else entries.add(PieEntry(percentage, item.title))

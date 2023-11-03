@@ -20,7 +20,7 @@
     </string-array>
 
     <string-array name="switchselector_categoryType">
-        <item>POR DESCRIÇÃO</item>
+        <item>DESCRIÇÃO</item>
         <item>POR TIPO</item>
     </string-array>
 

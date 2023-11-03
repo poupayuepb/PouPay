@@ -24,12 +24,24 @@ class SqlQueries {
         private const val FILTER_MONTH = 1
         private const val FILTER_YEAR = 2
 
-        fun addEntry(value: Double, description: String, category: Int, portion: Int?, context: Context, date: String = "now()", sucessListener: () -> Unit, failListener: (exceprion: SQLException) -> Unit) {
+        fun addEntry(value: Double, description: String, category: Int, portion: Int = 0, context: Context, date: String = "now()", sucessListener: () -> Unit, failListener: (exceprion: SQLException) -> Unit) {
             val condition = if (date == "now()") true else SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).parse(date)?.before(java.util.Date()) ?: false
             val stringDate = if (date == "now()") date else "'$date'"
-            val parcelas = portion?.toString() ?: "NULL"
-            val query = "INSERT INTO transacoes(usuario_nome, valor, data, descricao, categoria_id, parcelas, condicao) " +
-                    "VALUES('$username',$value,$stringDate, '$description', $category, $parcelas, $condition);"
+            var query = ""
+
+
+
+            if(portion > 0) {
+                for (i in 1..portion) {
+                    query += "INSERT INTO transacoes(usuario_nome, valor, data, descricao, categoria_id, parcelas, condicao) " +
+                            "VALUES('$username',${value / portion},$stringDate + interval '$i month', '$description', $category, $i, false);\n"
+                }
+            } else{
+                query = "INSERT INTO transacoes(usuario_nome, valor, data, descricao, categoria_id, parcelas, condicao) " +
+                        "VALUES('$username',$value,$stringDate, '$description', $category, $portion, $condition);"
+            }
+
+            println(query)
 
             Sql(query, context) { _, queryException ->
                 if (queryException == null) sucessListener.invoke()
@@ -296,14 +308,15 @@ class SqlQueries {
                 "$year-%"
 
             val query = if (category == 0) {
-                "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, LOWER(descricao) as desc\n" +
+                "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, LOWER(descricao) as desc, descricao\n" +
                         "FROM (SELECT valor, data, descricao FROM transacoes WHERE valor ${if (type == 1) ">=" else "<"} 0 AND usuario_nome = '$username') as t\n" +
-                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$dateLike' GROUP BY month, descricao;"
+                        "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$dateLike' GROUP BY month, descricao\n" +
+                        "ORDER BY descricao ASC;"
             } else {
-                "SELECT sum(valor) as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, nome as desc\n" +
-                        "FROM (SELECT valor, data, nome FROM transacoes INNER JOIN categorias ON categoria_id = categorias.id WHERE valor ${if (type == 1) ">=" else "<"} 0 AND usuario_nome = '$username') as t\n" +
+                "SELECT valor as price, to_char(date_trunc('month', data), 'YYYY-MM-01') as month, nome as desc, descricao, categoria_id\n" +
+                        "FROM (SELECT descricao, valor, data, nome, categoria_id FROM transacoes INNER JOIN categorias ON categoria_id = categorias.id WHERE valor ${if (type == 1) ">=" else "<"} 0 AND usuario_nome = '$username') as t\n" +
                         "WHERE to_char(date_trunc('month', data), 'YYYY-MM-01') LIKE '$dateLike'\n" +
-                        "GROUP BY month, nome;"
+                        "ORDER BY categoria_id ASC;\n"
             }
             Sql(query, context) { result, queryException ->
                 if (queryException != null) failListener.invoke(queryException)
@@ -314,7 +327,8 @@ class SqlQueries {
                         while (result.next()) {
                             val valor = result.getDouble("price")
                             val descricao = StringUtils.capitalize(result.getString("desc"))
-                            contents.add(ContentReportItem(descricao, valor))
+                            val subtitle = result.getString("descricao")
+                            contents.add(ContentReportItem(descricao, valor, subtitle ?: ""))
                         }
                         sucessListener.invoke(contents)
                     } catch (ex: SQLException) {

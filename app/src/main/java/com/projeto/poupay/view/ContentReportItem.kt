@@ -3,7 +3,7 @@ package com.projeto.poupay.view
 import com.projeto.poupay.R
 
 
-data class ContentReportItem(val title: String, val value: Double) {
+data class ContentReportItem(val title: String, var value: Double, val subtitule:String = "") {
     fun getImageID(): Int{
         val id: Int
         when (title.lowercase()) {
